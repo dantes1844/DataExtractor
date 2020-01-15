@@ -62,7 +62,7 @@ namespace DataExtractor.Services
                 text.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}\r\n");
             }
 
-            using (FileStream fs = new FileStream(defaultFile, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
             using (var sr = new StreamWriter(fs))
             {
                 sr.Write(text.ToString());

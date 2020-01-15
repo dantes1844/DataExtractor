@@ -26,7 +26,7 @@ namespace DataExtractor
             var result = Parallel.ForEach(dataList, inputData =>
             {
                 var service = new CaculateService();
-                service.ParallelRun(inputData);
+                service.ParallelRun(new CalculateConfig(), inputData);
                 if (!RecordStack.Contains(inputData)) { RecordStack.Add(inputData); }
 
                 Console.WriteLine($"已处理完成{RecordStack.Count(c => c.T > 0 || c.T < 0)}条记录");

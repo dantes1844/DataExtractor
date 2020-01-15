@@ -42,12 +42,13 @@
             this.Btn_Calcualte = new System.Windows.Forms.Button();
             this.Lb_DefaultValue = new System.Windows.Forms.Label();
             this.LB_RandomWay = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.Rb_RandomPerRecord = new System.Windows.Forms.RadioButton();
+            this.Rb_SameRandom = new System.Windows.Forms.RadioButton();
             this.Lb_Finished = new System.Windows.Forms.Label();
             this.Lb_Progress = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Lb_Total = new System.Windows.Forms.Label();
+            this.Lb_TotalTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LB_DataSource
@@ -88,6 +89,7 @@
             // Cb_MaximumParameter
             // 
             this.Cb_MaximumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cb_MaximumParameter.Enabled = false;
             this.Cb_MaximumParameter.FormattingEnabled = true;
             this.Cb_MaximumParameter.Items.AddRange(new object[] {
             "Ph1",
@@ -102,6 +104,7 @@
             // Cb_MediumParameter
             // 
             this.Cb_MediumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cb_MediumParameter.Enabled = false;
             this.Cb_MediumParameter.FormattingEnabled = true;
             this.Cb_MediumParameter.Location = new System.Drawing.Point(207, 64);
             this.Cb_MediumParameter.Name = "Cb_MediumParameter";
@@ -111,6 +114,7 @@
             // Cb_MinimumParameter
             // 
             this.Cb_MinimumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cb_MinimumParameter.Enabled = false;
             this.Cb_MinimumParameter.FormattingEnabled = true;
             this.Cb_MinimumParameter.Location = new System.Drawing.Point(300, 64);
             this.Cb_MinimumParameter.Name = "Cb_MinimumParameter";
@@ -120,7 +124,7 @@
             // Lb_Ph1BiggerThan
             // 
             this.Lb_Ph1BiggerThan.AutoSize = true;
-            this.Lb_Ph1BiggerThan.Location = new System.Drawing.Point(190, 67);
+            this.Lb_Ph1BiggerThan.Location = new System.Drawing.Point(185, 68);
             this.Lb_Ph1BiggerThan.Name = "Lb_Ph1BiggerThan";
             this.Lb_Ph1BiggerThan.Size = new System.Drawing.Size(11, 12);
             this.Lb_Ph1BiggerThan.TabIndex = 5;
@@ -137,7 +141,7 @@
             // Lb_Ph2BiggerThanPv
             // 
             this.Lb_Ph2BiggerThanPv.AutoSize = true;
-            this.Lb_Ph2BiggerThanPv.Location = new System.Drawing.Point(279, 67);
+            this.Lb_Ph2BiggerThanPv.Location = new System.Drawing.Point(277, 68);
             this.Lb_Ph2BiggerThanPv.Name = "Lb_Ph2BiggerThanPv";
             this.Lb_Ph2BiggerThanPv.Size = new System.Drawing.Size(11, 12);
             this.Lb_Ph2BiggerThanPv.TabIndex = 12;
@@ -171,27 +175,27 @@
             this.LB_RandomWay.TabIndex = 16;
             this.LB_RandomWay.Text = "随机数规则:";
             // 
-            // radioButton1
+            // Rb_RandomPerRecord
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(117, 137);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 16);
-            this.radioButton1.TabIndex = 17;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "按记录随机";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.Rb_RandomPerRecord.AutoSize = true;
+            this.Rb_RandomPerRecord.Checked = true;
+            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(117, 137);
+            this.Rb_RandomPerRecord.Name = "Rb_RandomPerRecord";
+            this.Rb_RandomPerRecord.Size = new System.Drawing.Size(83, 16);
+            this.Rb_RandomPerRecord.TabIndex = 17;
+            this.Rb_RandomPerRecord.TabStop = true;
+            this.Rb_RandomPerRecord.Text = "按记录随机";
+            this.Rb_RandomPerRecord.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // Rb_SameRandom
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(244, 135);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(119, 16);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.Text = "使用同一个随机数";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.Rb_SameRandom.AutoSize = true;
+            this.Rb_SameRandom.Location = new System.Drawing.Point(244, 137);
+            this.Rb_SameRandom.Name = "Rb_SameRandom";
+            this.Rb_SameRandom.Size = new System.Drawing.Size(119, 16);
+            this.Rb_SameRandom.TabIndex = 18;
+            this.Rb_SameRandom.Text = "使用同一个随机数";
+            this.Rb_SameRandom.UseVisualStyleBackColor = true;
             // 
             // Lb_Finished
             // 
@@ -225,23 +229,32 @@
             // Lb_Total
             // 
             this.Lb_Total.AutoSize = true;
-            this.Lb_Total.Location = new System.Drawing.Point(165, 167);
+            this.Lb_Total.Location = new System.Drawing.Point(167, 167);
             this.Lb_Total.Name = "Lb_Total";
             this.Lb_Total.Size = new System.Drawing.Size(11, 12);
             this.Lb_Total.TabIndex = 22;
             this.Lb_Total.Text = "0";
+            // 
+            // Lb_TotalTime
+            // 
+            this.Lb_TotalTime.AutoSize = true;
+            this.Lb_TotalTime.Location = new System.Drawing.Point(203, 167);
+            this.Lb_TotalTime.Name = "Lb_TotalTime";
+            this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
+            this.Lb_TotalTime.TabIndex = 23;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 221);
+            this.Controls.Add(this.Lb_TotalTime);
             this.Controls.Add(this.Lb_Total);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Lb_Progress);
             this.Controls.Add(this.Lb_Finished);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.Rb_SameRandom);
+            this.Controls.Add(this.Rb_RandomPerRecord);
             this.Controls.Add(this.LB_RandomWay);
             this.Controls.Add(this.Lb_DefaultValue);
             this.Controls.Add(this.Btn_Calcualte);
@@ -282,12 +295,13 @@
         private System.Windows.Forms.Button Btn_Calcualte;
         private System.Windows.Forms.Label Lb_DefaultValue;
         private System.Windows.Forms.Label LB_RandomWay;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton Rb_RandomPerRecord;
+        private System.Windows.Forms.RadioButton Rb_SameRandom;
         private System.Windows.Forms.Label Lb_Finished;
         private System.Windows.Forms.Label Lb_Progress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Lb_Total;
+        private System.Windows.Forms.Label Lb_TotalTime;
     }
 }
 

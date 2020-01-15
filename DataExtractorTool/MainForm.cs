@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -73,15 +74,61 @@ namespace DataExtractorTool
 
             Btn_Calcualte.Enabled = false;
             Btn_Calcualte.Text = "正在计算...";
+
+            if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
+            {
+                MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            CalculateConfig config = new CalculateConfig()
+            {
+                MaximumValue = Cb_MaximumParameter.SelectedItem.ToString(),
+                MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
+                MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
+                DefaultDeviation = deviation
+            };
+            double sameRandomNumber = 0d;
+            if (Rb_RandomPerRecord.Checked)
+            {
+                config.RandomNumberType = RandomNumberType.RandomNumberPerRecord;
+            }
+            else if (Rb_SameRandom.Checked)
+            {
+                var random = new Random();
+                sameRandomNumber = (170 - 150) * random.NextDouble() + 150;
+                config.RandomNumberType = RandomNumberType.SameRandomNumber;
+            }
+
             Task.Run(() =>
             {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+
                 var result = Parallel.ForEach(dataList, inputData =>
                 {
+                    if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                    {
+                        var random = new Random();
+                        inputData.RandP = (170 - 150) * random.NextDouble() + 150;
+                    }
+                    else
+                    {
+                        inputData.RandP = sameRandomNumber;
+                    }
+
                     var service = new CaculateService();
-                    service.ParallelRun(inputData);
+                    service.ParallelRun(config, inputData);
                     if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
 
-                    Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
+                    Lb_Finished.Invoke(new Action(() =>
+                    {
+                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                    }));
+
+                    Lb_TotalTime.Invoke(new Action(() =>
+                    {
+                        Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
+                    }));
                 });
 
                 if (result.IsCompleted)
@@ -96,7 +143,13 @@ namespace DataExtractorTool
                     var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
                     FileReader.SaveBaseData(savedFile, dataList);
 
-                    MessageBox.Show("计算完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information);
+                    if (openFileConfirm == DialogResult.Yes)
+                    {
+                        Process.Start("explorer.exe", $@"/select,{savedFile}");
+                    }
+
                 }
             });
         }

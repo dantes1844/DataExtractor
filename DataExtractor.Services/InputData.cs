@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using DataExtractor.Services;
 
 namespace DataExtractor
 {
@@ -26,28 +27,10 @@ namespace DataExtractor
         public double Ph2 { get; set; }
         public double Pv { get; set; }
 
-        //public bool IsValidX()
-        //{
-        //    var flag1 = Ph1 > Ph2 && Ph2 > Pv;
-        //    var flag2 = Math.Abs(Ph1 / Pv - Dr) <= 0.0001;
-        //    if (flag2 && flag1)
-        //    {
-        //        Debug.WriteLine($"Ph1={Ph1},Ph2={Ph2},Pv={Pv},Math.Abs(Ph1 / Pv - Dr)={Math.Abs(Ph1 / Pv - Dr)}");
-        //    }
-        //    return flag2 && flag1;
-        //}
-
         /// <summary>
         /// 随机数 150~170
         /// </summary>
-        public double RandP
-        {
-            get
-            {
-                var random = new Random();
-                return (170 - 150) * random.NextDouble() + 150;
-            }
-        }
+        public double RandP { get; set; }
 
         public double X { get; set; }
 
