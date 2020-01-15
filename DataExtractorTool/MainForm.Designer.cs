@@ -89,7 +89,6 @@
             // Cb_MaximumParameter
             // 
             this.Cb_MaximumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MaximumParameter.Enabled = false;
             this.Cb_MaximumParameter.FormattingEnabled = true;
             this.Cb_MaximumParameter.Items.AddRange(new object[] {
             "Ph1",
@@ -104,7 +103,6 @@
             // Cb_MediumParameter
             // 
             this.Cb_MediumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MediumParameter.Enabled = false;
             this.Cb_MediumParameter.FormattingEnabled = true;
             this.Cb_MediumParameter.Location = new System.Drawing.Point(207, 64);
             this.Cb_MediumParameter.Name = "Cb_MediumParameter";
@@ -114,7 +112,6 @@
             // Cb_MinimumParameter
             // 
             this.Cb_MinimumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MinimumParameter.Enabled = false;
             this.Cb_MinimumParameter.FormattingEnabled = true;
             this.Cb_MinimumParameter.Location = new System.Drawing.Point(300, 64);
             this.Cb_MinimumParameter.Name = "Cb_MinimumParameter";

@@ -25,7 +25,7 @@ namespace DataExtractor
 
             var result = Parallel.ForEach(dataList, inputData =>
             {
-                var service = new CaculateService();
+                var service = new Ph1Ph2Pv();
                 service.ParallelRun(new CalculateConfig(), inputData);
                 if (!RecordStack.Contains(inputData)) { RecordStack.Add(inputData); }
 

@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CaculateService.cs" />
+    <Compile Include="Ph1PvPh2.cs" />
+    <Compile Include="Ph2PvPh1.cs" />
+    <Compile Include="PvPh2Ph1.cs" />
+    <Compile Include="PvPh1Ph2.cs" />
+    <Compile Include="Ph2Ph1Pv.cs" />
+    <Compile Include="Ph1Ph2Pv.cs" />
+    <Compile Include="CalculateBase.cs" />
     <Compile Include="CalculateConfig.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="InputData.cs" />

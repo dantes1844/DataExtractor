@@ -51,9 +51,41 @@ namespace DataExtractorTool
             Tb_SourceDataPath.Text = fileDialog.FileName;
         }
 
+        private CalculateBase GetCalculator(string maximum, string medium, string minimum)
+        {
+            switch ($"{maximum}_{medium}_{minimum}")
+            {
+                case "ph1_ph2_pv":
+                    return new Ph1Ph2Pv();
+                case "ph1_pv_ph2":
+                    return new Ph1PvPh2();
+                case "ph2_ph1_pv":
+                    return new Ph2Ph1Pv();
+                case "ph2_pv_ph1":
+                    return new Ph2PvPh1();
+                case "pv_ph1_ph2":
+                    return new PvPh1Ph2();
+                case "pv_ph2_ph1":
+                    return new PvPh2Ph1();
+                default:
+                    return null;
+            }
+        }
+
         private ConcurrentBag<InputData> _recordStack;
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
+
+            var maximum = Cb_MaximumParameter.SelectedItem.ToString().ToLower();
+            var medium = Cb_MediumParameter.SelectedItem.ToString().ToLower();
+            var minimum = Cb_MinimumParameter.SelectedItem.ToString().ToLower();
+
+            if (maximum == medium || medium == minimum || maximum == minimum)
+            {
+                MessageBox.Show("大小关系选择不能重复", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             _recordStack = new ConcurrentBag<InputData>();
 
             var path = Tb_SourceDataPath.Text.Trim();
@@ -110,14 +142,13 @@ namespace DataExtractorTool
                     {
                         var random = new Random();
                         inputData.RandP = (170 - 150) * random.NextDouble() + 150;
-                        Debug.WriteLine($"RandomNumber={inputData.RandP}");
                     }
                     else
                     {
                         inputData.RandP = sameRandomNumber;
                     }
 
-                    var service = new CaculateService();
+                    var service = GetCalculator(maximum, medium, minimum);
                     service.ParallelRun(config, inputData);
                     if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
 
