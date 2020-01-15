@@ -15,4 +15,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataExtractor.Services\DataExtractor.Services.csproj" />
+  </ItemGroup>
+
 </Project>
