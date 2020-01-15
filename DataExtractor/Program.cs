@@ -96,7 +96,6 @@ namespace DataExtractor
         }
 
         private static readonly ConcurrentStack<InputData> RecordStack = new ConcurrentStack<InputData>();
-        private static readonly ConcurrentStack<InputData> FailedRecordStack = new ConcurrentStack<InputData>();
 
         /// <summary>
         /// 为了查找特殊数字的，结果证明t不一定是大于0的
@@ -105,16 +104,16 @@ namespace DataExtractor
         {
             int index = 1;
 
-            var s1 = -1.33;
-            var s2 = -132;
-            var s3 = 133;
+            var s1 = 0.131;
+            var s2 = -169;
+            var s3 = 169;
             var randP = 165.03;
             var dr = 3.3955;
             var fenmu = s3 * dr - s1;
             var item = IncreaseNumber;
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            var x = 35 + item;
+            var x = -714.698 + item;
             while (true)
             {
                 var t = randP * (1 - x * dr) / fenmu;
