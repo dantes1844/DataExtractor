@@ -49,6 +49,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Lb_Total = new System.Windows.Forms.Label();
             this.Lb_TotalTime = new System.Windows.Forms.Label();
+            this.Lb_LoopCount = new System.Windows.Forms.Label();
+            this.Tb_LoopCount = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LB_DataSource
@@ -131,7 +133,7 @@
             // 
             this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(117, 99);
             this.Tb_Ph2MinusPv.Name = "Tb_Ph2MinusPv";
-            this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(246, 21);
+            this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(57, 21);
             this.Tb_Ph2MinusPv.TabIndex = 11;
             this.Tb_Ph2MinusPv.Text = "2";
             // 
@@ -240,11 +242,30 @@
             this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
             this.Lb_TotalTime.TabIndex = 23;
             // 
+            // Lb_LoopCount
+            // 
+            this.Lb_LoopCount.AutoSize = true;
+            this.Lb_LoopCount.Location = new System.Drawing.Point(185, 102);
+            this.Lb_LoopCount.Name = "Lb_LoopCount";
+            this.Lb_LoopCount.Size = new System.Drawing.Size(59, 12);
+            this.Lb_LoopCount.TabIndex = 24;
+            this.Lb_LoopCount.Text = "遍历次数:";
+            // 
+            // Tb_LoopCount
+            // 
+            this.Tb_LoopCount.Location = new System.Drawing.Point(244, 99);
+            this.Tb_LoopCount.Name = "Tb_LoopCount";
+            this.Tb_LoopCount.Size = new System.Drawing.Size(119, 21);
+            this.Tb_LoopCount.TabIndex = 25;
+            this.Tb_LoopCount.Text = "20000000";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 221);
+            this.Controls.Add(this.Tb_LoopCount);
+            this.Controls.Add(this.Lb_LoopCount);
             this.Controls.Add(this.Lb_TotalTime);
             this.Controls.Add(this.Lb_Total);
             this.Controls.Add(this.label1);
@@ -299,6 +320,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Lb_Total;
         private System.Windows.Forms.Label Lb_TotalTime;
+        private System.Windows.Forms.Label Lb_LoopCount;
+        private System.Windows.Forms.TextBox Tb_LoopCount;
     }
 }
 

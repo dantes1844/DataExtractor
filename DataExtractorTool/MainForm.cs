@@ -103,12 +103,14 @@ namespace DataExtractorTool
 
             Lb_Total.Text = dataList.Count.ToString();
 
-            Btn_Calcualte.Enabled = false;
-            Btn_Calcualte.Text = "正在计算...";
-
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
             {
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!long.TryParse(Tb_LoopCount.Text, out var loopCount))
+            {
+                MessageBox.Show("遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -117,7 +119,8 @@ namespace DataExtractorTool
                 MaximumValue = Cb_MaximumParameter.SelectedItem.ToString(),
                 MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
                 MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
-                DefaultDeviation = deviation
+                DefaultDeviation = deviation,
+                LoopCount = loopCount
             };
             double sameRandomNumber = 0d;
             if (Rb_RandomPerRecord.Checked)
@@ -131,6 +134,8 @@ namespace DataExtractorTool
                 config.RandomNumberType = RandomNumberType.SameRandomNumber;
             }
 
+            Btn_Calcualte.Enabled = false;
+            Btn_Calcualte.Text = "正在计算...";
             Task.Run(() =>
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
@@ -164,6 +169,10 @@ namespace DataExtractorTool
 
                 if (result.IsCompleted)
                 {
+                    Lb_Finished.Invoke(new Action(() =>
+                    {
+                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                    }));
                     Btn_Calcualte.Invoke(new Action(() =>
                     {
                         Btn_Calcualte.Enabled = true;
