@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace DataExtractor
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            //ParallelRun();
+            ParallelRun();
 
-            FindOne();
+            //FindOne();
 
             stopwatch.Stop();
 
@@ -27,9 +28,6 @@ namespace DataExtractor
             Console.ReadLine();
         }
 
-        /// <summary>
-        /// 可以得到结果，但是计算较慢
-        /// </summary>
         static void ParallelRun()
         {
             var data = FileReader.ReadBaseData();
@@ -43,7 +41,25 @@ namespace DataExtractor
                 var randP = inputData.RandP;
                 var dr = inputData.Dr;
                 var fenmu = inputData.S3 * dr - inputData.S1;
-                var item = fenmu > 0 ? -1 * IncreaseNumber : IncreaseNumber;
+
+                var leftX = 1 / dr - 1;
+                var leftT = randP * (1 - leftX * dr) / fenmu;
+                var leftPh1 = s1 * leftT + randP;
+                var leftPh2 = s2 * leftT + randP * (2 - leftX);
+                var left = leftPh1 - leftPh2;
+
+                var rightX = 1 / dr + 1;
+                var rightT = randP * (1 - rightX * dr) / fenmu;
+                var rightPh1 = s1 * rightT + randP;
+                var rightPh2 = s2 * rightT + randP * (2 - rightX);
+                var right = rightPh1 - rightPh2;
+
+                var coefficient = 1;
+                if (left > right)
+                {
+                    coefficient = -1; //动态的判断当前的x应该是递增还是递减
+                }
+                var item = coefficient * IncreaseNumber;
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
                 var loopStart = 0;
@@ -60,8 +76,10 @@ namespace DataExtractor
                     var flag1 = ph1 > ph2 + 2 && ph2 > pv + 2;
                     var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
 
-                    if (flag2 && flag1 && !RecordStack.Contains(inputData))
+                    if (flag2 && flag1)
                     {
+                        if (RecordStack.Contains(inputData)) return;
+
                         inputData.X = x;
                         inputData.T = t;
                         inputData.Ph1 = ph1;
@@ -78,6 +96,7 @@ namespace DataExtractor
         }
 
         private static readonly ConcurrentStack<InputData> RecordStack = new ConcurrentStack<InputData>();
+        private static readonly ConcurrentStack<InputData> FailedRecordStack = new ConcurrentStack<InputData>();
 
         /// <summary>
         /// 为了查找特殊数字的，结果证明t不一定是大于0的
