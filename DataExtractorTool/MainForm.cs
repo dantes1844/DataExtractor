@@ -110,6 +110,7 @@ namespace DataExtractorTool
                     {
                         var random = new Random();
                         inputData.RandP = (170 - 150) * random.NextDouble() + 150;
+                        Debug.WriteLine($"RandomNumber={inputData.RandP}");
                     }
                     else
                     {

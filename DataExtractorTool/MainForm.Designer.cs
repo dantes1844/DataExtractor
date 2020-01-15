@@ -178,22 +178,22 @@
             // Rb_RandomPerRecord
             // 
             this.Rb_RandomPerRecord.AutoSize = true;
-            this.Rb_RandomPerRecord.Checked = true;
-            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(117, 137);
+            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(280, 137);
             this.Rb_RandomPerRecord.Name = "Rb_RandomPerRecord";
             this.Rb_RandomPerRecord.Size = new System.Drawing.Size(83, 16);
             this.Rb_RandomPerRecord.TabIndex = 17;
-            this.Rb_RandomPerRecord.TabStop = true;
             this.Rb_RandomPerRecord.Text = "按记录随机";
             this.Rb_RandomPerRecord.UseVisualStyleBackColor = true;
             // 
             // Rb_SameRandom
             // 
             this.Rb_SameRandom.AutoSize = true;
-            this.Rb_SameRandom.Location = new System.Drawing.Point(244, 137);
+            this.Rb_SameRandom.Checked = true;
+            this.Rb_SameRandom.Location = new System.Drawing.Point(117, 137);
             this.Rb_SameRandom.Name = "Rb_SameRandom";
             this.Rb_SameRandom.Size = new System.Drawing.Size(119, 16);
             this.Rb_SameRandom.TabIndex = 18;
+            this.Rb_SameRandom.TabStop = true;
             this.Rb_SameRandom.Text = "使用同一个随机数";
             this.Rb_SameRandom.UseVisualStyleBackColor = true;
             // 
