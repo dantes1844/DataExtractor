@@ -108,7 +108,7 @@ namespace DataExtractorTool
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!long.TryParse(Tb_LoopCount.Text, out var loopCount))
+            if (!int.TryParse(Tb_LoopCount.Text, out var loopCount))
             {
                 MessageBox.Show("遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -120,7 +120,7 @@ namespace DataExtractorTool
                 MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
                 MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
                 DefaultDeviation = deviation,
-                LoopCount = loopCount
+                LoopCount = loopCount * 10000
             };
             double sameRandomNumber = 0d;
             if (Rb_RandomPerRecord.Checked)

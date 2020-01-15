@@ -51,6 +51,7 @@
             this.Lb_TotalTime = new System.Windows.Forms.Label();
             this.Lb_LoopCount = new System.Windows.Forms.Label();
             this.Tb_LoopCount = new System.Windows.Forms.TextBox();
+            this.LB_LoopCountUnit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LB_DataSource
@@ -148,9 +149,9 @@
             // 
             // Btn_Calcualte
             // 
-            this.Btn_Calcualte.Location = new System.Drawing.Point(369, 186);
+            this.Btn_Calcualte.Location = new System.Drawing.Point(369, 187);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
-            this.Btn_Calcualte.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Calcualte.Size = new System.Drawing.Size(75, 41);
             this.Btn_Calcualte.TabIndex = 14;
             this.Btn_Calcualte.Text = "计算";
             this.Btn_Calcualte.UseVisualStyleBackColor = true;
@@ -255,15 +256,25 @@
             // 
             this.Tb_LoopCount.Location = new System.Drawing.Point(244, 99);
             this.Tb_LoopCount.Name = "Tb_LoopCount";
-            this.Tb_LoopCount.Size = new System.Drawing.Size(119, 21);
+            this.Tb_LoopCount.Size = new System.Drawing.Size(72, 21);
             this.Tb_LoopCount.TabIndex = 25;
-            this.Tb_LoopCount.Text = "20000000";
+            this.Tb_LoopCount.Text = "2000";
+            // 
+            // LB_LoopCountUnit
+            // 
+            this.LB_LoopCountUnit.AutoSize = true;
+            this.LB_LoopCountUnit.Location = new System.Drawing.Point(322, 102);
+            this.LB_LoopCountUnit.Name = "LB_LoopCountUnit";
+            this.LB_LoopCountUnit.Size = new System.Drawing.Size(41, 12);
+            this.LB_LoopCountUnit.TabIndex = 26;
+            this.LB_LoopCountUnit.Text = "万(次)";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 221);
+            this.ClientSize = new System.Drawing.Size(458, 235);
+            this.Controls.Add(this.LB_LoopCountUnit);
             this.Controls.Add(this.Tb_LoopCount);
             this.Controls.Add(this.Lb_LoopCount);
             this.Controls.Add(this.Lb_TotalTime);
@@ -322,6 +333,7 @@
         private System.Windows.Forms.Label Lb_TotalTime;
         private System.Windows.Forms.Label Lb_LoopCount;
         private System.Windows.Forms.TextBox Tb_LoopCount;
+        private System.Windows.Forms.Label LB_LoopCountUnit;
     }
 }
 
