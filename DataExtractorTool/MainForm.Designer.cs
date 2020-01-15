@@ -149,9 +149,9 @@
             // 
             // Btn_Calcualte
             // 
-            this.Btn_Calcualte.Location = new System.Drawing.Point(369, 187);
+            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 187);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
-            this.Btn_Calcualte.Size = new System.Drawing.Size(75, 41);
+            this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
             this.Btn_Calcualte.TabIndex = 14;
             this.Btn_Calcualte.Text = "计算";
             this.Btn_Calcualte.UseVisualStyleBackColor = true;
@@ -206,7 +206,7 @@
             this.Lb_Finished.Size = new System.Drawing.Size(11, 12);
             this.Lb_Finished.TabIndex = 19;
             this.Lb_Finished.Text = "0";
-            this.Lb_Finished.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Lb_Finished.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Lb_Progress
             // 
@@ -220,7 +220,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(145, 167);
+            this.label1.Location = new System.Drawing.Point(161, 167);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 21;
@@ -229,7 +229,7 @@
             // Lb_Total
             // 
             this.Lb_Total.AutoSize = true;
-            this.Lb_Total.Location = new System.Drawing.Point(167, 167);
+            this.Lb_Total.Location = new System.Drawing.Point(173, 167);
             this.Lb_Total.Name = "Lb_Total";
             this.Lb_Total.Size = new System.Drawing.Size(11, 12);
             this.Lb_Total.TabIndex = 22;
@@ -238,7 +238,7 @@
             // Lb_TotalTime
             // 
             this.Lb_TotalTime.AutoSize = true;
-            this.Lb_TotalTime.Location = new System.Drawing.Point(203, 167);
+            this.Lb_TotalTime.Location = new System.Drawing.Point(224, 167);
             this.Lb_TotalTime.Name = "Lb_TotalTime";
             this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
             this.Lb_TotalTime.TabIndex = 23;
