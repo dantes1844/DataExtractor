@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,8 +7,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataExtractor;
 using DataExtractor.Services;
 
 namespace DataExtractorTool
@@ -47,9 +50,18 @@ namespace DataExtractorTool
             Tb_SourceDataPath.Text = fileDialog.FileName;
         }
 
+        private ConcurrentBag<InputData> _recordStack;
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
+            _recordStack = new ConcurrentBag<InputData>();
+
             var path = Tb_SourceDataPath.Text.Trim();
+            if (string.IsNullOrEmpty(path))
+            {
+                MessageBox.Show("路径不能空撒", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_SourceDataPath.Focus();
+                return;
+            }
             var dataList = FileReader.ReadBaseData(path);
             if (dataList.Count == 0)
             {
@@ -57,15 +69,35 @@ namespace DataExtractorTool
                 return;
             }
 
+            Lb_Total.Text = dataList.Count.ToString();
+
+            Btn_Calcualte.Enabled = false;
+            Btn_Calcualte.Text = "正在计算...";
             Task.Run(() =>
             {
-                CaculateService.ParallelRun(dataList);
+                var result = Parallel.ForEach(dataList, inputData =>
+                {
+                    var service = new CaculateService();
+                    service.ParallelRun(inputData);
+                    if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
 
-                var fileInfo = new FileInfo(path);
-                var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
-                FileReader.SaveBaseData(savedFile, dataList);
+                    Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
+                });
 
-                MessageBox.Show("计算完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (result.IsCompleted)
+                {
+                    Btn_Calcualte.Invoke(new Action(() =>
+                    {
+                        Btn_Calcualte.Enabled = true;
+                        Btn_Calcualte.Text = "计算";
+                    }));
+
+                    var fileInfo = new FileInfo(path);
+                    var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
+                    FileReader.SaveBaseData(savedFile, dataList);
+
+                    MessageBox.Show("计算完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             });
         }
 

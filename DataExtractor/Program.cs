@@ -12,6 +12,8 @@ namespace DataExtractor
 {
     class Program
     {
+        private static readonly ConcurrentBag<InputData> RecordStack = new ConcurrentBag<InputData>();
+
         static void Main(string[] args)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -20,7 +22,21 @@ namespace DataExtractor
             var defaultFile = Path.Combine(baseDirectory, "testdata.dat");
 
             var dataList = FileReader.ReadBaseData(defaultFile);
-            CaculateService.ParallelRun(dataList);
+
+            var result = Parallel.ForEach(dataList, inputData =>
+            {
+                var service = new CaculateService();
+                service.ParallelRun(inputData);
+                if (!RecordStack.Contains(inputData)) { RecordStack.Add(inputData); }
+
+                Console.WriteLine($"已处理完成{RecordStack.Count(c => c.T > 0 || c.T < 0)}条记录");
+            });
+
+
+            if (result.IsCompleted)
+            {
+                Console.WriteLine("全部数据遍历完成...");
+            }
 
             var savedFile = Path.Combine(baseDirectory, "result.dat");
             FileReader.SaveBaseData(savedFile, dataList);

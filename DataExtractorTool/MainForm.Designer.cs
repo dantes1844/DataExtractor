@@ -28,31 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.LB_DataSource = new System.Windows.Forms.Label();
             this.Tb_SourceDataPath = new System.Windows.Forms.TextBox();
             this.Btn_OpenFile = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Lb_OrderRule = new System.Windows.Forms.Label();
             this.Cb_MaximumParameter = new System.Windows.Forms.ComboBox();
             this.Cb_MediumParameter = new System.Windows.Forms.ComboBox();
             this.Cb_MinimumParameter = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Lb_Ph1BiggerThan = new System.Windows.Forms.Label();
             this.Tb_Ph2MinusPv = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.Lb_Ph2BiggerThanPv = new System.Windows.Forms.Label();
             this.Btn_Calcualte = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.Lb_DefaultValue = new System.Windows.Forms.Label();
+            this.LB_RandomWay = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.Lb_Finished = new System.Windows.Forms.Label();
+            this.Lb_Progress = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Lb_Total = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // LB_DataSource
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "原始数据:";
+            this.LB_DataSource.AutoSize = true;
+            this.LB_DataSource.Location = new System.Drawing.Point(52, 30);
+            this.LB_DataSource.Name = "LB_DataSource";
+            this.LB_DataSource.Size = new System.Drawing.Size(59, 12);
+            this.LB_DataSource.TabIndex = 0;
+            this.LB_DataSource.Text = "原始数据:";
             // 
             // Tb_SourceDataPath
             // 
@@ -71,14 +76,14 @@
             this.Btn_OpenFile.UseVisualStyleBackColor = true;
             this.Btn_OpenFile.Click += new System.EventHandler(this.Btn_OpenFile_Click);
             // 
-            // label2
+            // Lb_OrderRule
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "排序规则:";
+            this.Lb_OrderRule.AutoSize = true;
+            this.Lb_OrderRule.Location = new System.Drawing.Point(52, 67);
+            this.Lb_OrderRule.Name = "Lb_OrderRule";
+            this.Lb_OrderRule.Size = new System.Drawing.Size(59, 12);
+            this.Lb_OrderRule.TabIndex = 3;
+            this.Lb_OrderRule.Text = "排序规则:";
             // 
             // Cb_MaximumParameter
             // 
@@ -88,7 +93,7 @@
             "Ph1",
             "Ph2",
             "Pv"});
-            this.Cb_MaximumParameter.Location = new System.Drawing.Point(117, 74);
+            this.Cb_MaximumParameter.Location = new System.Drawing.Point(117, 64);
             this.Cb_MaximumParameter.Name = "Cb_MaximumParameter";
             this.Cb_MaximumParameter.Size = new System.Drawing.Size(57, 20);
             this.Cb_MaximumParameter.TabIndex = 4;
@@ -98,7 +103,7 @@
             // 
             this.Cb_MediumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cb_MediumParameter.FormattingEnabled = true;
-            this.Cb_MediumParameter.Location = new System.Drawing.Point(207, 74);
+            this.Cb_MediumParameter.Location = new System.Drawing.Point(207, 64);
             this.Cb_MediumParameter.Name = "Cb_MediumParameter";
             this.Cb_MediumParameter.Size = new System.Drawing.Size(55, 20);
             this.Cb_MediumParameter.TabIndex = 6;
@@ -107,36 +112,36 @@
             // 
             this.Cb_MinimumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cb_MinimumParameter.FormattingEnabled = true;
-            this.Cb_MinimumParameter.Location = new System.Drawing.Point(300, 74);
+            this.Cb_MinimumParameter.Location = new System.Drawing.Point(300, 64);
             this.Cb_MinimumParameter.Name = "Cb_MinimumParameter";
             this.Cb_MinimumParameter.Size = new System.Drawing.Size(63, 20);
             this.Cb_MinimumParameter.TabIndex = 9;
             // 
-            // label3
+            // Lb_Ph1BiggerThan
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(190, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 12);
-            this.label3.TabIndex = 5;
-            this.label3.Text = ">";
+            this.Lb_Ph1BiggerThan.AutoSize = true;
+            this.Lb_Ph1BiggerThan.Location = new System.Drawing.Point(190, 67);
+            this.Lb_Ph1BiggerThan.Name = "Lb_Ph1BiggerThan";
+            this.Lb_Ph1BiggerThan.Size = new System.Drawing.Size(11, 12);
+            this.Lb_Ph1BiggerThan.TabIndex = 5;
+            this.Lb_Ph1BiggerThan.Text = ">";
             // 
             // Tb_Ph2MinusPv
             // 
-            this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(117, 117);
+            this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(117, 99);
             this.Tb_Ph2MinusPv.Name = "Tb_Ph2MinusPv";
             this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(246, 21);
             this.Tb_Ph2MinusPv.TabIndex = 11;
             this.Tb_Ph2MinusPv.Text = "2";
             // 
-            // label5
+            // Lb_Ph2BiggerThanPv
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(279, 77);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(11, 12);
-            this.label5.TabIndex = 12;
-            this.label5.Text = ">";
+            this.Lb_Ph2BiggerThanPv.AutoSize = true;
+            this.Lb_Ph2BiggerThanPv.Location = new System.Drawing.Point(279, 67);
+            this.Lb_Ph2BiggerThanPv.Name = "Lb_Ph2BiggerThanPv";
+            this.Lb_Ph2BiggerThanPv.Size = new System.Drawing.Size(11, 12);
+            this.Lb_Ph2BiggerThanPv.TabIndex = 12;
+            this.Lb_Ph2BiggerThanPv.Text = ">";
             // 
             // Btn_Calcualte
             // 
@@ -148,29 +153,29 @@
             this.Btn_Calcualte.UseVisualStyleBackColor = true;
             this.Btn_Calcualte.Click += new System.EventHandler(this.Btn_Calcualte_Click);
             // 
-            // label4
+            // Lb_DefaultValue
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(52, 120);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 12);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "默认差值:";
+            this.Lb_DefaultValue.AutoSize = true;
+            this.Lb_DefaultValue.Location = new System.Drawing.Point(52, 102);
+            this.Lb_DefaultValue.Name = "Lb_DefaultValue";
+            this.Lb_DefaultValue.Size = new System.Drawing.Size(59, 12);
+            this.Lb_DefaultValue.TabIndex = 15;
+            this.Lb_DefaultValue.Text = "默认差值:";
             // 
-            // label6
+            // LB_RandomWay
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(40, 164);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 12);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "随机数规则:";
+            this.LB_RandomWay.AutoSize = true;
+            this.LB_RandomWay.Location = new System.Drawing.Point(40, 137);
+            this.LB_RandomWay.Name = "LB_RandomWay";
+            this.LB_RandomWay.Size = new System.Drawing.Size(71, 12);
+            this.LB_RandomWay.TabIndex = 16;
+            this.LB_RandomWay.Text = "随机数规则:";
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(117, 164);
+            this.radioButton1.Location = new System.Drawing.Point(117, 137);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(83, 16);
             this.radioButton1.TabIndex = 17;
@@ -181,36 +186,81 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(244, 162);
+            this.radioButton2.Location = new System.Drawing.Point(244, 135);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(119, 16);
             this.radioButton2.TabIndex = 18;
             this.radioButton2.Text = "使用同一个随机数";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
+            // Lb_Finished
+            // 
+            this.Lb_Finished.AutoSize = true;
+            this.Lb_Finished.Location = new System.Drawing.Point(119, 167);
+            this.Lb_Finished.Name = "Lb_Finished";
+            this.Lb_Finished.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Lb_Finished.Size = new System.Drawing.Size(11, 12);
+            this.Lb_Finished.TabIndex = 19;
+            this.Lb_Finished.Text = "0";
+            this.Lb_Finished.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Lb_Progress
+            // 
+            this.Lb_Progress.AutoSize = true;
+            this.Lb_Progress.Location = new System.Drawing.Point(52, 167);
+            this.Lb_Progress.Name = "Lb_Progress";
+            this.Lb_Progress.Size = new System.Drawing.Size(59, 12);
+            this.Lb_Progress.TabIndex = 20;
+            this.Lb_Progress.Text = "当前进度:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(145, 167);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "/";
+            // 
+            // Lb_Total
+            // 
+            this.Lb_Total.AutoSize = true;
+            this.Lb_Total.Location = new System.Drawing.Point(165, 167);
+            this.Lb_Total.Name = "Lb_Total";
+            this.Lb_Total.Size = new System.Drawing.Size(11, 12);
+            this.Lb_Total.TabIndex = 22;
+            this.Lb_Total.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 221);
+            this.Controls.Add(this.Lb_Total);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Lb_Progress);
+            this.Controls.Add(this.Lb_Finished);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.LB_RandomWay);
+            this.Controls.Add(this.Lb_DefaultValue);
             this.Controls.Add(this.Btn_Calcualte);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.Lb_Ph2BiggerThanPv);
             this.Controls.Add(this.Tb_Ph2MinusPv);
             this.Controls.Add(this.Cb_MinimumParameter);
             this.Controls.Add(this.Cb_MediumParameter);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Lb_Ph1BiggerThan);
             this.Controls.Add(this.Cb_MaximumParameter);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Lb_OrderRule);
             this.Controls.Add(this.Btn_OpenFile);
             this.Controls.Add(this.Tb_SourceDataPath);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LB_DataSource);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "数据计算";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -219,21 +269,25 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LB_DataSource;
         private System.Windows.Forms.TextBox Tb_SourceDataPath;
         private System.Windows.Forms.Button Btn_OpenFile;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Lb_OrderRule;
         private System.Windows.Forms.ComboBox Cb_MaximumParameter;
         private System.Windows.Forms.ComboBox Cb_MediumParameter;
         private System.Windows.Forms.ComboBox Cb_MinimumParameter;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Lb_Ph1BiggerThan;
         private System.Windows.Forms.TextBox Tb_Ph2MinusPv;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label Lb_Ph2BiggerThanPv;
         private System.Windows.Forms.Button Btn_Calcualte;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Lb_DefaultValue;
+        private System.Windows.Forms.Label LB_RandomWay;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label Lb_Finished;
+        private System.Windows.Forms.Label Lb_Progress;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lb_Total;
     }
 }
 
