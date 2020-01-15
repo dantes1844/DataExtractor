@@ -114,13 +114,36 @@ namespace DataExtractorTool
                 return;
             }
 
+            if (!double.TryParse(Tb_RandomNumberStart.Text, out double randomNumberStart))
+            {
+                MessageBox.Show("随机数下限必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_RandomNumberStart.Focus();
+                return;
+            }
+
+            if (!double.TryParse(Tb_RandomNumberEnd.Text, out double randomNumberEnd))
+            {
+                MessageBox.Show("随机数上限必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_RandomNumberEnd.Focus();
+                return;
+            }
+
+            if (randomNumberStart >= randomNumberEnd)
+            {
+                MessageBox.Show("随机数上限必须大于下限", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_RandomNumberEnd.Focus();
+                return;
+            }
+
             CalculateConfig config = new CalculateConfig()
             {
                 MaximumValue = Cb_MaximumParameter.SelectedItem.ToString(),
                 MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
                 MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
                 DefaultDeviation = deviation,
-                LoopCount = loopCount * 10000
+                LoopCount = loopCount * 10000,
+                RandomNumberEnd = randomNumberEnd,
+                RandomNumberStart = randomNumberStart
             };
             double sameRandomNumber = 0d;
             if (Rb_RandomPerRecord.Checked)
@@ -130,7 +153,7 @@ namespace DataExtractorTool
             else if (Rb_SameRandom.Checked)
             {
                 var random = new Random();
-                sameRandomNumber = (170 - 150) * random.NextDouble() + 150;
+                sameRandomNumber = (config.RandomNumberEnd - config.RandomNumberStart) * random.NextDouble() + config.RandomNumberStart;
                 config.RandomNumberType = RandomNumberType.SameRandomNumber;
             }
 
@@ -145,7 +168,7 @@ namespace DataExtractorTool
                     if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
                     {
                         var random = new Random();
-                        inputData.RandP = (170 - 150) * random.NextDouble() + 150;
+                        inputData.RandP = (config.RandomNumberEnd - config.RandomNumberStart) * random.NextDouble() + config.RandomNumberStart;
                     }
                     else
                     {

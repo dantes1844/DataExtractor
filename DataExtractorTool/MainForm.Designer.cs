@@ -52,6 +52,10 @@
             this.Lb_LoopCount = new System.Windows.Forms.Label();
             this.Tb_LoopCount = new System.Windows.Forms.TextBox();
             this.LB_LoopCountUnit = new System.Windows.Forms.Label();
+            this.Lb_RandomNumber = new System.Windows.Forms.Label();
+            this.Tb_RandomNumberStart = new System.Windows.Forms.TextBox();
+            this.Tb_RandomNumberEnd = new System.Windows.Forms.TextBox();
+            this.Lb_RandomNumberTo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LB_DataSource
@@ -149,7 +153,7 @@
             // 
             // Btn_Calcualte
             // 
-            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 187);
+            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 242);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
             this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
             this.Btn_Calcualte.TabIndex = 14;
@@ -169,7 +173,7 @@
             // LB_RandomWay
             // 
             this.LB_RandomWay.AutoSize = true;
-            this.LB_RandomWay.Location = new System.Drawing.Point(40, 137);
+            this.LB_RandomWay.Location = new System.Drawing.Point(40, 168);
             this.LB_RandomWay.Name = "LB_RandomWay";
             this.LB_RandomWay.Size = new System.Drawing.Size(71, 12);
             this.LB_RandomWay.TabIndex = 16;
@@ -178,7 +182,7 @@
             // Rb_RandomPerRecord
             // 
             this.Rb_RandomPerRecord.AutoSize = true;
-            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(280, 137);
+            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(280, 168);
             this.Rb_RandomPerRecord.Name = "Rb_RandomPerRecord";
             this.Rb_RandomPerRecord.Size = new System.Drawing.Size(83, 16);
             this.Rb_RandomPerRecord.TabIndex = 17;
@@ -189,7 +193,7 @@
             // 
             this.Rb_SameRandom.AutoSize = true;
             this.Rb_SameRandom.Checked = true;
-            this.Rb_SameRandom.Location = new System.Drawing.Point(117, 137);
+            this.Rb_SameRandom.Location = new System.Drawing.Point(117, 168);
             this.Rb_SameRandom.Name = "Rb_SameRandom";
             this.Rb_SameRandom.Size = new System.Drawing.Size(119, 16);
             this.Rb_SameRandom.TabIndex = 18;
@@ -200,7 +204,7 @@
             // Lb_Finished
             // 
             this.Lb_Finished.AutoSize = true;
-            this.Lb_Finished.Location = new System.Drawing.Point(119, 167);
+            this.Lb_Finished.Location = new System.Drawing.Point(119, 198);
             this.Lb_Finished.Name = "Lb_Finished";
             this.Lb_Finished.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Lb_Finished.Size = new System.Drawing.Size(11, 12);
@@ -211,7 +215,7 @@
             // Lb_Progress
             // 
             this.Lb_Progress.AutoSize = true;
-            this.Lb_Progress.Location = new System.Drawing.Point(52, 167);
+            this.Lb_Progress.Location = new System.Drawing.Point(52, 198);
             this.Lb_Progress.Name = "Lb_Progress";
             this.Lb_Progress.Size = new System.Drawing.Size(59, 12);
             this.Lb_Progress.TabIndex = 20;
@@ -220,7 +224,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(161, 167);
+            this.label1.Location = new System.Drawing.Point(161, 198);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 21;
@@ -229,7 +233,7 @@
             // Lb_Total
             // 
             this.Lb_Total.AutoSize = true;
-            this.Lb_Total.Location = new System.Drawing.Point(173, 167);
+            this.Lb_Total.Location = new System.Drawing.Point(173, 198);
             this.Lb_Total.Name = "Lb_Total";
             this.Lb_Total.Size = new System.Drawing.Size(11, 12);
             this.Lb_Total.TabIndex = 22;
@@ -238,7 +242,7 @@
             // Lb_TotalTime
             // 
             this.Lb_TotalTime.AutoSize = true;
-            this.Lb_TotalTime.Location = new System.Drawing.Point(224, 167);
+            this.Lb_TotalTime.Location = new System.Drawing.Point(224, 198);
             this.Lb_TotalTime.Name = "Lb_TotalTime";
             this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
             this.Lb_TotalTime.TabIndex = 23;
@@ -269,11 +273,49 @@
             this.LB_LoopCountUnit.TabIndex = 26;
             this.LB_LoopCountUnit.Text = "万(次)";
             // 
+            // Lb_RandomNumber
+            // 
+            this.Lb_RandomNumber.AutoSize = true;
+            this.Lb_RandomNumber.Location = new System.Drawing.Point(40, 134);
+            this.Lb_RandomNumber.Name = "Lb_RandomNumber";
+            this.Lb_RandomNumber.Size = new System.Drawing.Size(71, 12);
+            this.Lb_RandomNumber.TabIndex = 27;
+            this.Lb_RandomNumber.Text = "随机数范围:";
+            // 
+            // Tb_RandomNumberStart
+            // 
+            this.Tb_RandomNumberStart.Location = new System.Drawing.Point(117, 131);
+            this.Tb_RandomNumberStart.Name = "Tb_RandomNumberStart";
+            this.Tb_RandomNumberStart.Size = new System.Drawing.Size(100, 21);
+            this.Tb_RandomNumberStart.TabIndex = 28;
+            this.Tb_RandomNumberStart.Text = "150";
+            // 
+            // Tb_RandomNumberEnd
+            // 
+            this.Tb_RandomNumberEnd.Location = new System.Drawing.Point(263, 131);
+            this.Tb_RandomNumberEnd.Name = "Tb_RandomNumberEnd";
+            this.Tb_RandomNumberEnd.Size = new System.Drawing.Size(100, 21);
+            this.Tb_RandomNumberEnd.TabIndex = 29;
+            this.Tb_RandomNumberEnd.Text = "170";
+            // 
+            // Lb_RandomNumberTo
+            // 
+            this.Lb_RandomNumberTo.AutoSize = true;
+            this.Lb_RandomNumberTo.Location = new System.Drawing.Point(235, 139);
+            this.Lb_RandomNumberTo.Name = "Lb_RandomNumberTo";
+            this.Lb_RandomNumberTo.Size = new System.Drawing.Size(11, 12);
+            this.Lb_RandomNumberTo.TabIndex = 30;
+            this.Lb_RandomNumberTo.Text = "~";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 235);
+            this.ClientSize = new System.Drawing.Size(454, 295);
+            this.Controls.Add(this.Lb_RandomNumberTo);
+            this.Controls.Add(this.Tb_RandomNumberEnd);
+            this.Controls.Add(this.Tb_RandomNumberStart);
+            this.Controls.Add(this.Lb_RandomNumber);
             this.Controls.Add(this.LB_LoopCountUnit);
             this.Controls.Add(this.Tb_LoopCount);
             this.Controls.Add(this.Lb_LoopCount);
@@ -334,6 +376,10 @@
         private System.Windows.Forms.Label Lb_LoopCount;
         private System.Windows.Forms.TextBox Tb_LoopCount;
         private System.Windows.Forms.Label LB_LoopCountUnit;
+        private System.Windows.Forms.Label Lb_RandomNumber;
+        private System.Windows.Forms.TextBox Tb_RandomNumberStart;
+        private System.Windows.Forms.TextBox Tb_RandomNumberEnd;
+        private System.Windows.Forms.Label Lb_RandomNumberTo;
     }
 }
 
