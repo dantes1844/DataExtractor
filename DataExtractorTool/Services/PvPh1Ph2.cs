@@ -17,21 +17,21 @@ namespace DataExtractorTool.Services
             var randP = inputData.RandP;
 
             var dr = inputData.Dr;
-            var fenmu = inputData.S3 * dr - inputData.S1;
+            var fenmu = inputData.S3 - inputData.S2 * dr;
 
             var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
             var item = coefficient * IncreaseNumber;
 
             return Parallel.For(0, config.LoopCount, (i, state) =>
             {
-                var x = item * i + 1 / dr;
-                var t = randP * (1 - x * dr) / fenmu;
-                var ph1 = s1 * t + randP;
-                var ph2 = s2 * t + randP * (2 - x);
+                var x = item * i + dr;
+                var t = randP * (dr - x) / fenmu;
                 var pv = s3 * t + randP * x;
+                var ph1 = s1 * t + randP * (2 - x);
+                var ph2 = s2 * t + randP;
 
-                var flag1 = ph1 > ph2 + config.DefaultDeviation && ph2 > pv + config.DefaultDeviation;
-                var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
+                var flag1 = pv > ph1 + config.DefaultDeviation && ph1 > ph2 + config.DefaultDeviation;
+                var flag2 = Math.Abs(pv / ph2 - dr) <= 0.0001;
 
                 if (!flag2 || !flag1) return;
 
@@ -42,24 +42,24 @@ namespace DataExtractorTool.Services
                 inputData.Pv = pv;
 
                 stopwatch.Stop();
-                //Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
+                Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
                 state.Stop();
             });
         }
 
         private static int ExtractCoefficient(double dr, double randP, double s1, double s2, double s3, double fenmu)
         {
-            var leftX = 1 / dr - 1;
-            var leftT = randP * (1 - leftX * dr) / fenmu;
-            var leftPh1 = s1 * leftT + randP;
-            var leftPh2 = s2 * leftT + randP * (2 - leftX);
-            var left = leftPh1 - leftPh2;
+            var leftX = dr - 1;
+            var leftT = randP * (dr - leftX) / fenmu;
+            var leftPv = s3 * leftT + randP * leftX;
+            var leftPh1 = s1 * leftT + randP * (2 - leftX);
+            var left = leftPv - leftPh1;
 
-            var rightX = 1 / dr + 1;
-            var rightT = randP * (1 - rightX * dr) / fenmu;
-            var rightPh1 = s1 * rightT + randP;
-            var rightPh2 = s2 * rightT + randP * (2 - rightX);
-            var right = rightPh1 - rightPh2;
+            var rightX = dr + 1;
+            var rightT = randP * (dr - rightX) / fenmu;
+            var rightPv = s3 * rightT + randP * rightX;
+            var rightPh1 = s1 * rightT + randP * (2 - rightX);
+            var right = rightPv - rightPh1;
 
             var coefficient = 1;
             if (left > right)

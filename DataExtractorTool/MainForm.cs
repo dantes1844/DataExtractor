@@ -50,26 +50,6 @@ namespace DataExtractorTool
             Tb_SourceDataPath.Text = fileDialog.FileName;
         }
 
-        private CalculateBase GetCalculator(string maximum, string medium, string minimum)
-        {
-            switch ($"{maximum}_{medium}_{minimum}")
-            {
-                case "ph1_ph2_pv":
-                    return new Ph1Ph2Pv();
-                case "ph1_pv_ph2":
-                    return new Ph1PvPh2();
-                case "ph2_ph1_pv":
-                    return new Ph2Ph1Pv();
-                case "ph2_pv_ph1":
-                    return new Ph2PvPh1();
-                case "pv_ph1_ph2":
-                    return new PvPh1Ph2();
-                case "pv_ph2_ph1":
-                    return new PvPh2Ph1();
-                default:
-                    return null;
-            }
-        }
 
         private ConcurrentBag<InputData> _recordStack;
         private void Btn_Calcualte_Click(object sender, EventArgs e)
@@ -101,7 +81,6 @@ namespace DataExtractorTool
                 return;
             }
 
-            Lb_Total.Text = dataList.Count.ToString();
 
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
             {
@@ -114,88 +93,91 @@ namespace DataExtractorTool
                 return;
             }
 
-            if (!double.TryParse(Tb_RandomNumberStart.Text, out double randomNumberStart))
-            {
-                MessageBox.Show("随机数下限必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Tb_RandomNumberStart.Focus();
-                return;
-            }
-
-            if (!double.TryParse(Tb_RandomNumberEnd.Text, out double randomNumberEnd))
-            {
-                MessageBox.Show("随机数上限必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Tb_RandomNumberEnd.Focus();
-                return;
-            }
-
-            if (randomNumberStart >= randomNumberEnd)
-            {
-                MessageBox.Show("随机数上限必须大于下限", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Tb_RandomNumberEnd.Focus();
-                return;
-            }
-
             CalculateConfig config = new CalculateConfig()
             {
                 MaximumValue = Cb_MaximumParameter.SelectedItem.ToString(),
                 MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
                 MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
                 DefaultDeviation = deviation,
-                LoopCount = loopCount * 10000,
-                RandomNumberEnd = randomNumberEnd,
-                RandomNumberStart = randomNumberStart
+                LoopCount = loopCount * 10000
             };
-            double sameRandomNumber = 0d;
+            double sameRandomNumber1 = 0d;
+            double sameRandomNumber3 = 0d;
+            double sameRandomNumber2 = 0d;
             if (Rb_RandomPerRecord.Checked)
             {
                 config.RandomNumberType = RandomNumberType.RandomNumberPerRecord;
             }
             else if (Rb_SameRandom.Checked)
             {
-                var random = new Random();
-                sameRandomNumber = (config.RandomNumberEnd - config.RandomNumberStart) * random.NextDouble() + config.RandomNumberStart;
                 config.RandomNumberType = RandomNumberType.SameRandomNumber;
+                var random = new Random();
+                sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
+                sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
+                sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
             }
 
             Btn_Calcualte.Enabled = false;
             Btn_Calcualte.Text = "正在计算...";
+
+            Debug.WriteLine($"一类:{dataList.Count(c => c.DataType == DataType.Yilei)},二类:{dataList.Count(c => c.DataType == DataType.Erlei)},三类:{dataList.Count(c => c.DataType == DataType.Sanlei)}");
+            var temp = dataList.Where(c => c.DataType == DataType.Erlei);
+            Lb_Total.Text = temp.Count().ToString();
             Task.Run(() =>
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
-                var result = Parallel.ForEach(dataList, inputData =>
+                for (int i = 0; i < 20; i++)
                 {
-                    if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                    var subTemp = temp.Skip(i * 10000).Take(10000);
+                    Debug.WriteLine($"i={i},count={subTemp.Count()}");
+                    var result = Parallel.ForEach(subTemp, inputData =>
                     {
-                        var random = new Random();
-                        inputData.RandP = (config.RandomNumberEnd - config.RandomNumberStart) * random.NextDouble() + config.RandomNumberStart;
-                    }
-                    else
-                    {
-                        inputData.RandP = sameRandomNumber;
-                    }
+                        CalculateBase service;
+                        switch (inputData.DataType)
+                        {
+                            case DataType.Yilei:
+                                inputData.RandP = sameRandomNumber1;
+                                service = new Ph1Ph2Pv();
+                                break;
+                            case DataType.Erlei:
+                                inputData.RandP = sameRandomNumber2;
+                                service = new Ph1PvPh2();
+                                break;
+                            case DataType.Sanlei:
+                                inputData.RandP = sameRandomNumber3;
+                                service = new PvPh1Ph2();
+                                break;
+                            default:
+                                service = null;
+                                break;
+                        }
 
-                    var service = GetCalculator(maximum, medium, minimum);
-                    service.ParallelRun(config, inputData);
-                    if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
+                        if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                        {
+                            var random = new Random();
+                            inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
+                        }
 
-                    Lb_Finished.Invoke(new Action(() =>
-                    {
-                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                    }));
+                        service?.ParallelRun(config, inputData);
+                        if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
 
-                    Lb_TotalTime.Invoke(new Action(() =>
-                    {
-                        Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
-                    }));
-                });
+                        Lb_Finished.Invoke(new Action(() =>
+                        {
+                            Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                        }));
 
-                if (result.IsCompleted)
+                        Lb_TotalTime.Invoke(new Action(() =>
+                        {
+                            Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
+                        }));
+                    });
+
+                }
+                
+
+                //if (result.IsCompleted)
                 {
-                    Lb_Finished.Invoke(new Action(() =>
-                    {
-                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                    }));
                     Btn_Calcualte.Invoke(new Action(() =>
                     {
                         Btn_Calcualte.Enabled = true;
@@ -220,6 +202,25 @@ namespace DataExtractorTool
         private void Cb_MaximumParameter_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var service = new Ph1PvPh2();
+            var random = new Random();
+            var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
+            var sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
+            var sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
+            var inputData = new InputData()
+            {
+                DataType = DataType.Erlei,
+                S1 = 694.6,
+                S2 = -663.2,
+                S3 = 6.9,
+                Dr = 2.2723,
+                RandP = sameRandomNumber2
+            };
+            service.FindOne(inputData);
         }
     }
 }

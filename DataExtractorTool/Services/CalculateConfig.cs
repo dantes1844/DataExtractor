@@ -15,10 +15,6 @@
         /// </summary>
         public long LoopCount { get; set; }
 
-        public double RandomNumberStart { get; set; }
-
-        public double RandomNumberEnd { get; set; }
-
         /// <summary>
         /// 差值
         /// </summary>

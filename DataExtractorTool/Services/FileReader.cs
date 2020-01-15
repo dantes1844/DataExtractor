@@ -23,6 +23,7 @@ namespace DataExtractorTool.Services
             {
                 try
                 {
+                    var index = 1;
                     List<InputData> list = new List<InputData>();
                     var text = sr.ReadToEnd();
 
@@ -30,6 +31,7 @@ namespace DataExtractorTool.Services
                     int pointNumber = 1;
                     foreach (var line in lines)
                     {
+                        if (index++ == 1) { continue; }
                         var array = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         if (array.Length == 4)
                         {
@@ -51,6 +53,18 @@ namespace DataExtractorTool.Services
                                 S2 = Convert.ToDouble(array[2]),
                                 S3 = Convert.ToDouble(array[3]),
                                 Dr = Convert.ToDouble(array[4]),
+                            });
+                        }
+                        else if (array.Length == 6)
+                        {
+                            list.Add(new InputData()
+                            {
+                                PointNumber = Convert.ToInt32(array[0]),
+                                DataType = (DataType)Convert.ToInt32(array[1]),
+                                S1 = Convert.ToDouble(array[2]),
+                                S2 = Convert.ToDouble(array[3]),
+                                S3 = Convert.ToDouble(array[4]),
+                                Dr = Convert.ToDouble(array[5]),
                             });
                         }
                     }
