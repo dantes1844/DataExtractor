@@ -31,18 +31,28 @@ namespace DataExtractor.Services
                     foreach (var line in lines)
                     {
                         var array = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        if (array.Length != 4)
+                        if (array.Length == 4)
                         {
-                            continue;
+                            list.Add(new InputData()
+                            {
+                                PointNumber = pointNumber++,
+                                S1 = Convert.ToDouble(array[0]),
+                                S2 = Convert.ToDouble(array[1]),
+                                S3 = Convert.ToDouble(array[2]),
+                                Dr = Convert.ToDouble(array[3]),
+                            });
                         }
-                        list.Add(new InputData()
+                        else if (array.Length == 5)
                         {
-                            PointNumber = pointNumber++,
-                            S1 = Convert.ToDouble(array[0]),
-                            S2 = Convert.ToDouble(array[1]),
-                            S3 = Convert.ToDouble(array[2]),
-                            Dr = Convert.ToDouble(array[3]),
-                        });
+                            list.Add(new InputData()
+                            {
+                                PointNumber = Convert.ToInt32(array[0]),
+                                S1 = Convert.ToDouble(array[1]),
+                                S2 = Convert.ToDouble(array[2]),
+                                S3 = Convert.ToDouble(array[3]),
+                                Dr = Convert.ToDouble(array[4]),
+                            });
+                        }
                     }
 
                     return list;

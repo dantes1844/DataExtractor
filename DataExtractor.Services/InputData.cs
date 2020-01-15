@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using DataExtractor.Services;
-
-namespace DataExtractor
+﻿namespace DataExtractor.Services
 {
     public class InputData
     {
@@ -15,10 +9,6 @@ namespace DataExtractor
         public double S1 { get; set; }
         public double S2 { get; set; }
         public double S3 { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double Dr { get; set; }
 
         #endregion
@@ -36,14 +26,9 @@ namespace DataExtractor
 
         public double T { get; set; }
 
-        /// <summary>
-        /// 遍历次数
-        /// </summary>
-        public int Count { get; set; }
-
         public override string ToString()
         {
-            return $"Count={Count},S1={S1},S2={S2},S3={S3},Dr*S3-S1={Dr * S3 - S1},Rp={RandP}";
+            return $"S1={S1},S2={S2},S3={S3},Dr*S3-S1={Dr * S3 - S1},Rp={RandP}";
         }
     }
 }
