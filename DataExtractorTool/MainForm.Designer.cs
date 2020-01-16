@@ -32,13 +32,7 @@
             this.LB_DataSource = new System.Windows.Forms.Label();
             this.Tb_SourceDataPath = new System.Windows.Forms.TextBox();
             this.Btn_OpenFile = new System.Windows.Forms.Button();
-            this.Lb_OrderRule = new System.Windows.Forms.Label();
-            this.Cb_MaximumParameter = new System.Windows.Forms.ComboBox();
-            this.Cb_MediumParameter = new System.Windows.Forms.ComboBox();
-            this.Cb_MinimumParameter = new System.Windows.Forms.ComboBox();
-            this.Lb_Ph1BiggerThan = new System.Windows.Forms.Label();
             this.Tb_Ph2MinusPv = new System.Windows.Forms.TextBox();
-            this.Lb_Ph2BiggerThanPv = new System.Windows.Forms.Label();
             this.Btn_Calcualte = new System.Windows.Forms.Button();
             this.Lb_DefaultValue = new System.Windows.Forms.Label();
             this.LB_RandomWay = new System.Windows.Forms.Label();
@@ -83,76 +77,17 @@
             this.Btn_OpenFile.UseVisualStyleBackColor = true;
             this.Btn_OpenFile.Click += new System.EventHandler(this.Btn_OpenFile_Click);
             // 
-            // Lb_OrderRule
-            // 
-            this.Lb_OrderRule.AutoSize = true;
-            this.Lb_OrderRule.Location = new System.Drawing.Point(52, 67);
-            this.Lb_OrderRule.Name = "Lb_OrderRule";
-            this.Lb_OrderRule.Size = new System.Drawing.Size(59, 12);
-            this.Lb_OrderRule.TabIndex = 3;
-            this.Lb_OrderRule.Text = "排序规则:";
-            // 
-            // Cb_MaximumParameter
-            // 
-            this.Cb_MaximumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MaximumParameter.FormattingEnabled = true;
-            this.Cb_MaximumParameter.Items.AddRange(new object[] {
-            "Ph1",
-            "Ph2",
-            "Pv"});
-            this.Cb_MaximumParameter.Location = new System.Drawing.Point(117, 64);
-            this.Cb_MaximumParameter.Name = "Cb_MaximumParameter";
-            this.Cb_MaximumParameter.Size = new System.Drawing.Size(57, 20);
-            this.Cb_MaximumParameter.TabIndex = 4;
-            this.Cb_MaximumParameter.SelectedIndexChanged += new System.EventHandler(this.Cb_MaximumParameter_SelectedIndexChanged);
-            // 
-            // Cb_MediumParameter
-            // 
-            this.Cb_MediumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MediumParameter.FormattingEnabled = true;
-            this.Cb_MediumParameter.Location = new System.Drawing.Point(207, 64);
-            this.Cb_MediumParameter.Name = "Cb_MediumParameter";
-            this.Cb_MediumParameter.Size = new System.Drawing.Size(55, 20);
-            this.Cb_MediumParameter.TabIndex = 6;
-            // 
-            // Cb_MinimumParameter
-            // 
-            this.Cb_MinimumParameter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cb_MinimumParameter.FormattingEnabled = true;
-            this.Cb_MinimumParameter.Location = new System.Drawing.Point(300, 64);
-            this.Cb_MinimumParameter.Name = "Cb_MinimumParameter";
-            this.Cb_MinimumParameter.Size = new System.Drawing.Size(63, 20);
-            this.Cb_MinimumParameter.TabIndex = 9;
-            // 
-            // Lb_Ph1BiggerThan
-            // 
-            this.Lb_Ph1BiggerThan.AutoSize = true;
-            this.Lb_Ph1BiggerThan.Location = new System.Drawing.Point(185, 68);
-            this.Lb_Ph1BiggerThan.Name = "Lb_Ph1BiggerThan";
-            this.Lb_Ph1BiggerThan.Size = new System.Drawing.Size(11, 12);
-            this.Lb_Ph1BiggerThan.TabIndex = 5;
-            this.Lb_Ph1BiggerThan.Text = ">";
-            // 
             // Tb_Ph2MinusPv
             // 
-            this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(117, 99);
+            this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(116, 63);
             this.Tb_Ph2MinusPv.Name = "Tb_Ph2MinusPv";
             this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(57, 21);
             this.Tb_Ph2MinusPv.TabIndex = 11;
             this.Tb_Ph2MinusPv.Text = "2";
             // 
-            // Lb_Ph2BiggerThanPv
-            // 
-            this.Lb_Ph2BiggerThanPv.AutoSize = true;
-            this.Lb_Ph2BiggerThanPv.Location = new System.Drawing.Point(277, 68);
-            this.Lb_Ph2BiggerThanPv.Name = "Lb_Ph2BiggerThanPv";
-            this.Lb_Ph2BiggerThanPv.Size = new System.Drawing.Size(11, 12);
-            this.Lb_Ph2BiggerThanPv.TabIndex = 12;
-            this.Lb_Ph2BiggerThanPv.Text = ">";
-            // 
             // Btn_Calcualte
             // 
-            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 225);
+            this.Btn_Calcualte.Location = new System.Drawing.Point(355, 189);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
             this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
             this.Btn_Calcualte.TabIndex = 14;
@@ -163,7 +98,7 @@
             // Lb_DefaultValue
             // 
             this.Lb_DefaultValue.AutoSize = true;
-            this.Lb_DefaultValue.Location = new System.Drawing.Point(52, 102);
+            this.Lb_DefaultValue.Location = new System.Drawing.Point(51, 66);
             this.Lb_DefaultValue.Name = "Lb_DefaultValue";
             this.Lb_DefaultValue.Size = new System.Drawing.Size(59, 12);
             this.Lb_DefaultValue.TabIndex = 15;
@@ -172,7 +107,7 @@
             // LB_RandomWay
             // 
             this.LB_RandomWay.AutoSize = true;
-            this.LB_RandomWay.Location = new System.Drawing.Point(40, 136);
+            this.LB_RandomWay.Location = new System.Drawing.Point(39, 100);
             this.LB_RandomWay.Name = "LB_RandomWay";
             this.LB_RandomWay.Size = new System.Drawing.Size(71, 12);
             this.LB_RandomWay.TabIndex = 16;
@@ -181,7 +116,7 @@
             // Rb_RandomPerRecord
             // 
             this.Rb_RandomPerRecord.AutoSize = true;
-            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(280, 136);
+            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(279, 100);
             this.Rb_RandomPerRecord.Name = "Rb_RandomPerRecord";
             this.Rb_RandomPerRecord.Size = new System.Drawing.Size(83, 16);
             this.Rb_RandomPerRecord.TabIndex = 17;
@@ -192,7 +127,7 @@
             // 
             this.Rb_SameRandom.AutoSize = true;
             this.Rb_SameRandom.Checked = true;
-            this.Rb_SameRandom.Location = new System.Drawing.Point(117, 136);
+            this.Rb_SameRandom.Location = new System.Drawing.Point(116, 100);
             this.Rb_SameRandom.Name = "Rb_SameRandom";
             this.Rb_SameRandom.Size = new System.Drawing.Size(119, 16);
             this.Rb_SameRandom.TabIndex = 18;
@@ -203,7 +138,7 @@
             // Lb_Finished
             // 
             this.Lb_Finished.AutoSize = true;
-            this.Lb_Finished.Location = new System.Drawing.Point(119, 196);
+            this.Lb_Finished.Location = new System.Drawing.Point(118, 160);
             this.Lb_Finished.Name = "Lb_Finished";
             this.Lb_Finished.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Lb_Finished.Size = new System.Drawing.Size(11, 12);
@@ -214,7 +149,7 @@
             // Lb_Progress
             // 
             this.Lb_Progress.AutoSize = true;
-            this.Lb_Progress.Location = new System.Drawing.Point(52, 196);
+            this.Lb_Progress.Location = new System.Drawing.Point(51, 160);
             this.Lb_Progress.Name = "Lb_Progress";
             this.Lb_Progress.Size = new System.Drawing.Size(59, 12);
             this.Lb_Progress.TabIndex = 20;
@@ -223,7 +158,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(161, 196);
+            this.label1.Location = new System.Drawing.Point(160, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 21;
@@ -232,7 +167,7 @@
             // Lb_Total
             // 
             this.Lb_Total.AutoSize = true;
-            this.Lb_Total.Location = new System.Drawing.Point(173, 196);
+            this.Lb_Total.Location = new System.Drawing.Point(172, 160);
             this.Lb_Total.Name = "Lb_Total";
             this.Lb_Total.Size = new System.Drawing.Size(11, 12);
             this.Lb_Total.TabIndex = 22;
@@ -241,7 +176,7 @@
             // Lb_TotalTime
             // 
             this.Lb_TotalTime.AutoSize = true;
-            this.Lb_TotalTime.Location = new System.Drawing.Point(224, 196);
+            this.Lb_TotalTime.Location = new System.Drawing.Point(223, 160);
             this.Lb_TotalTime.Name = "Lb_TotalTime";
             this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
             this.Lb_TotalTime.TabIndex = 23;
@@ -249,7 +184,7 @@
             // Lb_LoopCount
             // 
             this.Lb_LoopCount.AutoSize = true;
-            this.Lb_LoopCount.Location = new System.Drawing.Point(185, 102);
+            this.Lb_LoopCount.Location = new System.Drawing.Point(184, 66);
             this.Lb_LoopCount.Name = "Lb_LoopCount";
             this.Lb_LoopCount.Size = new System.Drawing.Size(59, 12);
             this.Lb_LoopCount.TabIndex = 24;
@@ -257,7 +192,7 @@
             // 
             // Tb_LoopCount
             // 
-            this.Tb_LoopCount.Location = new System.Drawing.Point(244, 99);
+            this.Tb_LoopCount.Location = new System.Drawing.Point(243, 63);
             this.Tb_LoopCount.Name = "Tb_LoopCount";
             this.Tb_LoopCount.Size = new System.Drawing.Size(72, 21);
             this.Tb_LoopCount.TabIndex = 25;
@@ -266,7 +201,7 @@
             // LB_LoopCountUnit
             // 
             this.LB_LoopCountUnit.AutoSize = true;
-            this.LB_LoopCountUnit.Location = new System.Drawing.Point(322, 102);
+            this.LB_LoopCountUnit.Location = new System.Drawing.Point(321, 66);
             this.LB_LoopCountUnit.Name = "LB_LoopCountUnit";
             this.LB_LoopCountUnit.Size = new System.Drawing.Size(41, 12);
             this.LB_LoopCountUnit.TabIndex = 26;
@@ -274,8 +209,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(61, 225);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Location = new System.Drawing.Point(60, 189);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 41);
             this.button1.TabIndex = 27;
@@ -287,7 +222,7 @@
             // Lb_DataType
             // 
             this.Lb_DataType.AutoSize = true;
-            this.Lb_DataType.Location = new System.Drawing.Point(70, 167);
+            this.Lb_DataType.Location = new System.Drawing.Point(69, 131);
             this.Lb_DataType.Name = "Lb_DataType";
             this.Lb_DataType.Size = new System.Drawing.Size(35, 12);
             this.Lb_DataType.TabIndex = 28;
@@ -297,7 +232,7 @@
             // 
             this.Cb_DataType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cb_DataType.FormattingEnabled = true;
-            this.Cb_DataType.Location = new System.Drawing.Point(117, 164);
+            this.Cb_DataType.Location = new System.Drawing.Point(116, 128);
             this.Cb_DataType.Name = "Cb_DataType";
             this.Cb_DataType.Size = new System.Drawing.Size(121, 20);
             this.Cb_DataType.TabIndex = 29;
@@ -306,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 278);
+            this.ClientSize = new System.Drawing.Size(460, 240);
             this.Controls.Add(this.Cb_DataType);
             this.Controls.Add(this.Lb_DataType);
             this.Controls.Add(this.button1);
@@ -323,13 +258,7 @@
             this.Controls.Add(this.LB_RandomWay);
             this.Controls.Add(this.Lb_DefaultValue);
             this.Controls.Add(this.Btn_Calcualte);
-            this.Controls.Add(this.Lb_Ph2BiggerThanPv);
             this.Controls.Add(this.Tb_Ph2MinusPv);
-            this.Controls.Add(this.Cb_MinimumParameter);
-            this.Controls.Add(this.Cb_MediumParameter);
-            this.Controls.Add(this.Lb_Ph1BiggerThan);
-            this.Controls.Add(this.Cb_MaximumParameter);
-            this.Controls.Add(this.Lb_OrderRule);
             this.Controls.Add(this.Btn_OpenFile);
             this.Controls.Add(this.Tb_SourceDataPath);
             this.Controls.Add(this.LB_DataSource);
@@ -350,13 +279,7 @@
         private System.Windows.Forms.Label LB_DataSource;
         private System.Windows.Forms.TextBox Tb_SourceDataPath;
         private System.Windows.Forms.Button Btn_OpenFile;
-        private System.Windows.Forms.Label Lb_OrderRule;
-        private System.Windows.Forms.ComboBox Cb_MaximumParameter;
-        private System.Windows.Forms.ComboBox Cb_MediumParameter;
-        private System.Windows.Forms.ComboBox Cb_MinimumParameter;
-        private System.Windows.Forms.Label Lb_Ph1BiggerThan;
         private System.Windows.Forms.TextBox Tb_Ph2MinusPv;
-        private System.Windows.Forms.Label Lb_Ph2BiggerThanPv;
         private System.Windows.Forms.Button Btn_Calcualte;
         private System.Windows.Forms.Label Lb_DefaultValue;
         private System.Windows.Forms.Label LB_RandomWay;

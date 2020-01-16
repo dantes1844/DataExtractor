@@ -22,11 +22,6 @@ namespace DataExtractorTool
             InitializeComponent();
         }
 
-        private readonly List<string> _parameters = new List<string>()
-        {
-            "Ph1","Ph2","Pv"
-        };
-
         class DataTypeList
         {
             public string Name { get; set; }
@@ -36,14 +31,6 @@ namespace DataExtractorTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Cb_MaximumParameter.DataSource = _parameters.ToList();
-            Cb_MediumParameter.DataSource = _parameters.ToList();
-            Cb_MinimumParameter.DataSource = _parameters.ToList();
-
-            Cb_MaximumParameter.SelectedItem = _parameters.First(c => c == "Ph1");
-            Cb_MediumParameter.SelectedItem = _parameters.First(c => c == "Ph2");
-            Cb_MinimumParameter.SelectedItem = _parameters.First(c => c == "Pv");
-
             Cb_DataType.DataSource = new List<DataTypeList>()
             {
                 new DataTypeList(){Name = "全部",Value = 0},
@@ -71,17 +58,6 @@ namespace DataExtractorTool
         private ConcurrentBag<InputData> _recordStack;
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
-
-            var maximum = Cb_MaximumParameter.SelectedItem.ToString().ToLower();
-            var medium = Cb_MediumParameter.SelectedItem.ToString().ToLower();
-            var minimum = Cb_MinimumParameter.SelectedItem.ToString().ToLower();
-
-            if (maximum == medium || medium == minimum || maximum == minimum)
-            {
-                MessageBox.Show("大小关系选择不能重复", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             _recordStack = new ConcurrentBag<InputData>();
 
             var path = Tb_SourceDataPath.Text.Trim();
@@ -112,9 +88,6 @@ namespace DataExtractorTool
 
             CalculateConfig config = new CalculateConfig()
             {
-                MaximumValue = Cb_MaximumParameter.SelectedItem.ToString(),
-                MediumValue = Cb_MediumParameter.SelectedItem.ToString(),
-                MinimumValue = Cb_MinimumParameter.SelectedItem.ToString(),
                 DefaultDeviation = deviation,
                 LoopCount = loopCount * 10000
             };
