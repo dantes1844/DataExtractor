@@ -6,7 +6,6 @@ namespace DataExtractorTool.Services
 {
     public class PvPh1Ph2 : CalculateBase
     {
-        private new const double IncreaseNumber = 0.1d;
         public override ParallelLoopResult ParallelRun(CalculateConfig config, InputData inputData)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -21,9 +20,9 @@ namespace DataExtractorTool.Services
             var fenmu = inputData.S3 - inputData.S2 * dr;
 
             var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
-            var item = coefficient * IncreaseNumber;
+            var item = coefficient * config.SanleiIncreaseNumber;
 
-            return Parallel.For(0, config.LoopCount, (i, state) =>
+            return Parallel.For(0, config.SanleiLoopCount, (i, state) =>
             {
                 var x = item * i + dr;
                 var t = randP * (dr - x) / fenmu;
@@ -76,12 +75,13 @@ namespace DataExtractorTool.Services
             var config = new CalculateConfig()
             {
                 DefaultDeviation = 2,
-                LoopCount = 20000000
+                SanleiLoopCount = 20000,
+                SanleiIncreaseNumber = 0.1
             };
             var fenmu = inputData.S3 - inputData.S2 * inputData.Dr;
             var coefficient = ExtractCoefficient(inputData.Dr, inputData.RandP, inputData.S1, inputData.S2, inputData.S3, fenmu);
 
-            var item = coefficient * IncreaseNumber;
+            var item = coefficient * config.SanleiIncreaseNumber;
             var x = inputData.Dr;
             var i = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -116,7 +116,7 @@ namespace DataExtractorTool.Services
                 Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={inputData.S1},S2={inputData.S2},S3={inputData.S3},RandP={inputData.RandP:F4},Dr={inputData.Dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
 
                 break;
-            } while (i <= config.LoopCount);
+            } while (i <= config.SanleiLoopCount);
 
         }
     }

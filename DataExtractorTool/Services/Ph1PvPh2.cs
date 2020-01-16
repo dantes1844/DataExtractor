@@ -20,9 +20,9 @@ namespace DataExtractorTool.Services
             var fenmu = inputData.S1 - inputData.S2 * dr;
 
             var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
-            var item = coefficient * IncreaseNumber;
+            var item = coefficient * config.ErleiIncreaseNumber;
 
-            return Parallel.For(1, config.LoopCount, (i, state) =>
+            return Parallel.For(1, config.ErleiLoopCount, (i, state) =>
             {
                 var x = item * i + 2 * dr / (1 + dr);
                 var t = (dr * randP * (2 - x) - randP * x) / fenmu;
@@ -42,7 +42,7 @@ namespace DataExtractorTool.Services
                 inputData.Pv = pv;
 
                 stopwatch.Stop();
-               // Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
+                // Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
                 state.Stop();
             });
         }
@@ -75,8 +75,9 @@ namespace DataExtractorTool.Services
         {
             var config = new CalculateConfig()
             {
-                LoopCount = 20000000,
-                RandomNumberType = RandomNumberType.RandomNumberPerRecord
+                ErleiLoopCount = 20000000,
+                RandomNumberType = RandomNumberType.RandomNumberPerRecord,
+                ErleiIncreaseNumber = 0.00001d
             };
             var s1 = inputData.S1;
             var s2 = inputData.S2;
@@ -94,13 +95,13 @@ namespace DataExtractorTool.Services
             var basenumber = 2 * dr / (1 + dr);
             while (true)
             {
-                var x = basenumber +  IncreaseNumber * i++;
+                var x = basenumber + config.ErleiIncreaseNumber * i++;
                 var t = (dr * randP * (2 - x) - randP * x) / fenmu;
                 var ph1 = s1 * t + randP * x;
                 var pv = s3 * t + randP;
                 var ph2 = s2 * t + randP * (2 - x);
 
-                Debug.WriteLine($"S1={s1},s2={s2},s3={s3},x={x},t={t},ph1={ph1:F4},pv={pv:F4},ph2={ph2:F4},ph1/ph2={ph1/ph2:F4}");
+                Debug.WriteLine($"S1={s1},s2={s2},s3={s3},x={x},t={t},ph1={ph1:F4},pv={pv:F4},ph2={ph2:F4},ph1/ph2={ph1 / ph2:F4}");
 
                 var flag1 = ph1 > pv + config.DefaultDeviation && pv > ph2 + config.DefaultDeviation;
                 var flag2 = Math.Abs(ph1 / ph2 - dr) <= 0.0001;

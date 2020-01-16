@@ -20,9 +20,9 @@ namespace DataExtractorTool.Services
             var fenmu = inputData.S3 * dr - inputData.S1;
 
             var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
-            var item = coefficient * IncreaseNumber;
+            var item = coefficient * config.YileiIncreaseNumber;
 
-            return Parallel.For(0, config.LoopCount, (i, state) =>
+            return Parallel.For(0, config.YileiLoopCount, (i, state) =>
             {
                 var x = item * i + 1 / dr;
                 var t = randP * (1 - x * dr) / fenmu;
@@ -83,7 +83,7 @@ namespace DataExtractorTool.Services
             var randP = 165.03;
             var dr = 3.3955;
             var fenmu = s3 * dr - s1;
-            var item = IncreaseNumber;
+            var item = 0.00001d;
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             var x = -714.698 + item;

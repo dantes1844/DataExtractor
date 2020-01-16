@@ -56,9 +56,12 @@ namespace DataExtractorTool
 
 
         private ConcurrentBag<InputData> _recordStack;
+        private const int LoopCountBase = 10000;
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
             _recordStack = new ConcurrentBag<InputData>();
+
+            #region 路径
 
             var path = Tb_SourceDataPath.Text.Trim();
             if (string.IsNullOrEmpty(path))
@@ -74,23 +77,71 @@ namespace DataExtractorTool
                 return;
             }
 
+            #endregion
+
+            #region 差值
 
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
             {
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-            if (!int.TryParse(Tb_LoopCount.Text, out var loopCount))
+            } 
+
+            #endregion
+
+            #region 修正值
+
+            if (!double.TryParse(Tb_TypeOneIncreaseNumber.Text, out double oneIncrease))
             {
-                MessageBox.Show("遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("一类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (!double.TryParse(Tb_TypeTwoIncreaseNumber.Text, out double twoIncrease))
+            {
+                MessageBox.Show("二类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!double.TryParse(Tb_TypeThreeIncreaseNumber.Text, out double threeIncrease))
+            {
+                MessageBox.Show("三类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            } 
+
+            #endregion
+
+            #region 次数
+
+            if (!int.TryParse(Tb_TypeOneLoopCount.Text, out var loopCount))
+            {
+                MessageBox.Show("一类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!int.TryParse(Tb_TypeTwoLoopCount.Text, out var twoLoopCount))
+            {
+                MessageBox.Show("二类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!int.TryParse(Tb_TypeThreeLoopCount.Text, out var threeLoopCount))
+            {
+                MessageBox.Show("三类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            #endregion
+
+            #region 配置项
 
             CalculateConfig config = new CalculateConfig()
             {
                 DefaultDeviation = deviation,
-                LoopCount = loopCount * 10000
+                YileiLoopCount = loopCount * LoopCountBase,
+                YileiIncreaseNumber = oneIncrease,
+                ErleiLoopCount = twoLoopCount * LoopCountBase,
+                ErleiIncreaseNumber = twoIncrease,
+                SanleiLoopCount = threeLoopCount * LoopCountBase,
+                SanleiIncreaseNumber = threeIncrease,
             };
+
             double sameRandomNumber1 = 0d;
             double sameRandomNumber3 = 0d;
             double sameRandomNumber2 = 0d;
@@ -105,7 +156,9 @@ namespace DataExtractorTool
                 sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
                 sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
                 sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
-            }
+            } 
+
+            #endregion
 
             Btn_Calcualte.Enabled = false;
             Btn_Calcualte.Text = "正在计算...";

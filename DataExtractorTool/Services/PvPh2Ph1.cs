@@ -22,7 +22,7 @@ namespace DataExtractorTool.Services
             var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
             var item = coefficient * IncreaseNumber;
 
-            return Parallel.For(0, config.LoopCount, (i, state) =>
+            return Parallel.For(0, config.YileiLoopCount, (i, state) =>
             {
                 var x = item * i + 1 / dr;
                 var t = randP * (1 - x * dr) / fenmu;
