@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace DataExtractorTool.Services
@@ -83,12 +84,14 @@ namespace DataExtractorTool.Services
             var csvText = new StringBuilder();
             var txtText = new StringBuilder();
             csvText.Append("No.,type,S1,S2,S3,dr,rp,x,t,ph1,ph2,pv\r\n");
-            foreach (var item in list)
+            if (list.Any())
             {
-                txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}\r\n");
-                csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}\r\n");
+                foreach (var item in list)
+                {
+                    txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}\r\n");
+                    csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}\r\n");
+                }
             }
-
             using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
             using (var sr = new StreamWriter(fs))
             {

@@ -236,6 +236,10 @@ namespace DataExtractorTool
 
                     });
                 }
+                Lb_Finished.Invoke(new Action(() =>
+                {
+                    Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                }));
 
                 Btn_Calcualte.Invoke(new Action(() =>
                 {
@@ -269,6 +273,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
+            FileReader.SaveBaseData(@"D:\yujian\test.data",new List<InputData>());
             var service = new PvPh1Ph2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
