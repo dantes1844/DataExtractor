@@ -27,6 +27,13 @@ namespace DataExtractorTool
             "Ph1","Ph2","Pv"
         };
 
+        class DataTypeList
+        {
+            public string Name { get; set; }
+
+            public int Value { get; set; }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Cb_MaximumParameter.DataSource = _parameters.ToList();
@@ -36,6 +43,16 @@ namespace DataExtractorTool
             Cb_MaximumParameter.SelectedItem = _parameters.First(c => c == "Ph1");
             Cb_MediumParameter.SelectedItem = _parameters.First(c => c == "Ph2");
             Cb_MinimumParameter.SelectedItem = _parameters.First(c => c == "Pv");
+
+            Cb_DataType.DataSource = new List<DataTypeList>()
+            {
+                new DataTypeList(){Name = "全部",Value = 0},
+                new DataTypeList(){Name = "一类",Value =  (int)DataType.Yilei},
+                new DataTypeList(){Name = "二类",Value = (int)DataType.Erlei},
+                new DataTypeList(){Name = "三类",Value = (int)DataType.Sanlei},
+            };
+            Cb_DataType.DisplayMember = nameof(DataTypeList.Name);
+            Cb_DataType.ValueMember = nameof(DataTypeList.Value);
         }
 
         private void Btn_OpenFile_Click(object sender, EventArgs e)
@@ -121,53 +138,78 @@ namespace DataExtractorTool
             Btn_Calcualte.Text = "正在计算...";
 
             Debug.WriteLine($"一类:{dataList.Count(c => c.DataType == DataType.Yilei)},二类:{dataList.Count(c => c.DataType == DataType.Erlei)},三类:{dataList.Count(c => c.DataType == DataType.Sanlei)}");
-            var temp = dataList.Where(c => c.DataType == DataType.Erlei).ToList();
-            Lb_Total.Text = temp.Count().ToString();
+            var type = (int)Cb_DataType.SelectedValue;
+            if (type > 0)
+            {
+                var dataType = (DataType)type;
+                dataList = dataList.Where(c => c.DataType == dataType).ToList();
+            }
+
+            Lb_Total.Text = dataList.Count().ToString();
             Task.Run(() =>
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
-                var result = Parallel.ForEach(temp, inputData =>
+                var total = 20;
+                var average = Math.DivRem(dataList.Count, total, out var mod);
+                if (mod != 0)
                 {
-                    CalculateBase service;
-                    switch (inputData.DataType)
-                    {
-                        case DataType.Yilei:
-                            inputData.RandP = sameRandomNumber1;
-                            service = new Ph1Ph2Pv();
-                            break;
-                        case DataType.Erlei:
-                            inputData.RandP = sameRandomNumber2;
-                            service = new Ph1PvPh2();
-                            break;
-                        case DataType.Sanlei:
-                            inputData.RandP = sameRandomNumber3;
-                            service = new PvPh1Ph2();
-                            break;
-                        default:
-                            service = null;
-                            break;
-                    }
+                    average += total;
+                }
 
-                    if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
-                    {
-                        var random = new Random();
-                        inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
-                    }
+                for (int j = 0; j < total; j++)
+                {
+                    var subTemp = dataList.Skip(j * average).Take(average).ToList();
+                    Debug.WriteLine($"j={j},count={subTemp.Count}");
 
-                    service?.ParallelRun(config, inputData);
-                    if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
-
-                    Lb_Finished.Invoke(new Action(() =>
+                    var result = Parallel.ForEach(subTemp, inputData =>
                     {
-                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                    }));
+                        CalculateBase service;
+                        switch (inputData.DataType)
+                        {
+                            case DataType.Yilei:
+                                inputData.RandP = sameRandomNumber1;
+                                service = new Ph1Ph2Pv();
+                                break;
+                            case DataType.Erlei:
+                                inputData.RandP = sameRandomNumber2;
+                                service = new Ph1PvPh2();
+                                break;
+                            case DataType.Sanlei:
+                                inputData.RandP = sameRandomNumber3;
+                                service = new PvPh1Ph2();
+                                break;
+                            default:
+                                service = null;
+                                break;
+                        }
 
-                    Lb_TotalTime.Invoke(new Action(() =>
-                    {
-                        Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
-                    }));
-                });
+                        if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                        {
+                            var random = new Random();
+                            inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
+                        }
+
+                        service?.ParallelRun(config, inputData);
+                        if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
+
+                        
+                        if (_recordStack.Count % 1000 == 0)
+                        {
+                            Lb_Finished.Invoke(new Action(() =>
+                            {
+                                Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                            }));
+
+                            Lb_TotalTime.Invoke(new Action(() =>
+                            {
+                                Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
+                            }));
+                            Debug.WriteLine($"当前执行完成了{_recordStack.Count}.耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)");
+                        }
+
+                    });
+                }
 
                 Btn_Calcualte.Invoke(new Action(() =>
                 {
@@ -195,6 +237,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
+            FileReader.SaveBaseData(@"D:\yujian\test.dat", new List<InputData>());
             var service = new Ph1PvPh2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
