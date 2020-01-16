@@ -121,80 +121,69 @@ namespace DataExtractorTool
             Btn_Calcualte.Text = "正在计算...";
 
             Debug.WriteLine($"一类:{dataList.Count(c => c.DataType == DataType.Yilei)},二类:{dataList.Count(c => c.DataType == DataType.Erlei)},三类:{dataList.Count(c => c.DataType == DataType.Sanlei)}");
-            var temp = dataList.Where(c => c.DataType == DataType.Erlei);
+            var temp = dataList.Where(c => c.DataType == DataType.Erlei).ToList();
             Lb_Total.Text = temp.Count().ToString();
             Task.Run(() =>
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
-                for (int i = 0; i < 20; i++)
+                var result = Parallel.ForEach(temp, inputData =>
                 {
-                    var subTemp = temp.Skip(i * 10000).Take(10000);
-                    Debug.WriteLine($"i={i},count={subTemp.Count()}");
-                    var result = Parallel.ForEach(subTemp, inputData =>
+                    CalculateBase service;
+                    switch (inputData.DataType)
                     {
-                        CalculateBase service;
-                        switch (inputData.DataType)
-                        {
-                            case DataType.Yilei:
-                                inputData.RandP = sameRandomNumber1;
-                                service = new Ph1Ph2Pv();
-                                break;
-                            case DataType.Erlei:
-                                inputData.RandP = sameRandomNumber2;
-                                service = new Ph1PvPh2();
-                                break;
-                            case DataType.Sanlei:
-                                inputData.RandP = sameRandomNumber3;
-                                service = new PvPh1Ph2();
-                                break;
-                            default:
-                                service = null;
-                                break;
-                        }
-
-                        if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
-                        {
-                            var random = new Random();
-                            inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
-                        }
-
-                        service?.ParallelRun(config, inputData);
-                        if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
-
-                        Lb_Finished.Invoke(new Action(() =>
-                        {
-                            Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                        }));
-
-                        Lb_TotalTime.Invoke(new Action(() =>
-                        {
-                            Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
-                        }));
-                    });
-
-                }
-                
-
-                //if (result.IsCompleted)
-                {
-                    Btn_Calcualte.Invoke(new Action(() =>
-                    {
-                        Btn_Calcualte.Enabled = true;
-                        Btn_Calcualte.Text = "计算";
-                    }));
-
-                    var fileInfo = new FileInfo(path);
-                    var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
-                    FileReader.SaveBaseData(savedFile, dataList);
-
-                    var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Information);
-                    if (openFileConfirm == DialogResult.Yes)
-                    {
-                        Process.Start("explorer.exe", $@"/select,{savedFile}");
+                        case DataType.Yilei:
+                            inputData.RandP = sameRandomNumber1;
+                            service = new Ph1Ph2Pv();
+                            break;
+                        case DataType.Erlei:
+                            inputData.RandP = sameRandomNumber2;
+                            service = new Ph1PvPh2();
+                            break;
+                        case DataType.Sanlei:
+                            inputData.RandP = sameRandomNumber3;
+                            service = new PvPh1Ph2();
+                            break;
+                        default:
+                            service = null;
+                            break;
                     }
 
+                    if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                    {
+                        var random = new Random();
+                        inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
+                    }
+
+                    service?.ParallelRun(config, inputData);
+                    if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
+
+                    Lb_Finished.Invoke(new Action(() =>
+                    {
+                        Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
+                    }));
+
+                    Lb_TotalTime.Invoke(new Action(() =>
+                    {
+                        Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
+                    }));
+                });
+
+                Btn_Calcualte.Invoke(new Action(() =>
+                {
+                    Btn_Calcualte.Enabled = true;
+                    Btn_Calcualte.Text = "计算";
+                }));
+
+                var fileInfo = new FileInfo(path);
+                var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
+                FileReader.SaveBaseData(savedFile, dataList);
+
+                var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
+                if (openFileConfirm == DialogResult.Yes)
+                {
+                    Process.Start("explorer.exe", $@"/select,{savedFile}");
                 }
             });
         }
