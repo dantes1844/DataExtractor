@@ -166,7 +166,7 @@ namespace DataExtractorTool
                         service?.ParallelRun(config, inputData);
                         if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
 
-                        
+
                         if (_recordStack.Count % 1000 == 0)
                         {
                             Lb_Finished.Invoke(new Action(() =>
@@ -191,7 +191,13 @@ namespace DataExtractorTool
                 }));
 
                 var fileInfo = new FileInfo(path);
-                var savedFile = Path.Combine(fileInfo.DirectoryName, "result.csv");
+                var dotPosition = fileInfo.Name.LastIndexOf(".");
+
+                var savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name.Insert(dotPosition, ".result")}");
+                if (dotPosition < 0)
+                {
+                    savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
+                }
                 FileReader.SaveBaseData(savedFile, dataList);
 
                 var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
@@ -210,8 +216,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileReader.SaveBaseData(@"D:\yujian\test.csv", new List<InputData>());
-            var service = new Ph1PvPh2();
+            var service = new PvPh1Ph2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
             var sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
@@ -219,11 +224,11 @@ namespace DataExtractorTool
             var inputData = new InputData()
             {
                 DataType = DataType.Erlei,
-                S1 = 694.6,
-                S2 = -663.2,
-                S3 = 6.9,
-                Dr = 2.2723,
-                RandP = sameRandomNumber2
+                S1 = 279.6,
+                S2 = -1309.7,
+                S3 = -226.6,
+                Dr = 2.4871,
+                RandP = sameRandomNumber3
             };
             service.FindOne(inputData);
         }
