@@ -150,7 +150,7 @@ namespace DataExtractorTool
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
-                var total = 20;
+                var total = 30;
                 var average = Math.DivRem(dataList.Count, total, out var mod);
                 if (mod != 0)
                 {
@@ -218,7 +218,7 @@ namespace DataExtractorTool
                 }));
 
                 var fileInfo = new FileInfo(path);
-                var savedFile = Path.Combine(fileInfo.DirectoryName, "result.dat");
+                var savedFile = Path.Combine(fileInfo.DirectoryName, "result.csv");
                 FileReader.SaveBaseData(savedFile, dataList);
 
                 var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
@@ -237,7 +237,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileReader.SaveBaseData(@"D:\yujian\test.dat", new List<InputData>());
+            FileReader.SaveBaseData(@"D:\yujian\test.csv", new List<InputData>());
             var service = new Ph1PvPh2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
