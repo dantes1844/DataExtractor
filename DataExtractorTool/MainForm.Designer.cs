@@ -128,7 +128,7 @@
             // Rb_RandomPerRecord
             // 
             this.Rb_RandomPerRecord.AutoSize = true;
-            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(279, 187);
+            this.Rb_RandomPerRecord.Location = new System.Drawing.Point(280, 187);
             this.Rb_RandomPerRecord.Name = "Rb_RandomPerRecord";
             this.Rb_RandomPerRecord.Size = new System.Drawing.Size(83, 16);
             this.Rb_RandomPerRecord.TabIndex = 17;
