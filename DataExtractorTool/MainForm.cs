@@ -85,7 +85,7 @@ namespace DataExtractorTool
             {
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            } 
+            }
 
             #endregion
 
@@ -105,7 +105,7 @@ namespace DataExtractorTool
             {
                 MessageBox.Show("三类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            } 
+            }
 
             #endregion
 
@@ -156,7 +156,7 @@ namespace DataExtractorTool
                 sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
                 sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
                 sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
-            } 
+            }
 
             #endregion
 
@@ -212,8 +212,9 @@ namespace DataExtractorTool
 
                         if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
                         {
-                            var random = new Random();
-                            inputData.RandP = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble() + inputData.RandomNumberStart;
+                            var random = new Random((int)DateTime.Now.Ticks);
+                            var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
+                            inputData.RandP = rp + inputData.RandomNumberStart;
                         }
 
                         service?.ParallelRun(config, inputData);
@@ -238,13 +239,7 @@ namespace DataExtractorTool
                 }
                 Lb_Finished.Invoke(new Action(() =>
                 {
-                    Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                }));
-
-                Btn_Calcualte.Invoke(new Action(() =>
-                {
-                    Btn_Calcualte.Enabled = true;
-                    Btn_Calcualte.Text = "计算";
+                    Lb_Finished.Text = _recordStack.Count().ToString();
                 }));
 
                 var fileInfo = new FileInfo(path);
@@ -256,6 +251,13 @@ namespace DataExtractorTool
                     savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                 }
                 FileReader.SaveBaseData(savedFile, dataList);
+
+                //文件已经保存了再设置按钮的可用状态
+                Btn_Calcualte.Invoke(new Action(() =>
+                {
+                    Btn_Calcualte.Enabled = true;
+                    Btn_Calcualte.Text = "计算";
+                }));
 
                 var openFileConfirm = MessageBox.Show($"计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information);
@@ -273,7 +275,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileReader.SaveBaseData(@"D:\yujian\test.data",new List<InputData>());
+            FileReader.SaveBaseData(@"D:\yujian\test.data", new List<InputData>());
             var service = new PvPh1Ph2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
