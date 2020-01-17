@@ -32,6 +32,12 @@
         /// 差值
         /// </summary>
         public double DefaultDeviation { get; set; } = 2;
+
+
+        /// <summary>
+        /// T的最小值
+        /// </summary>
+        public double? TMinimumValue { get; set; }
     }
 
     public enum RandomNumberType

@@ -19,13 +19,27 @@ namespace DataExtractorTool.Services
             var dr = inputData.Dr;
             var fenmu = inputData.S1 - inputData.S2 * dr;
 
-            var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
+            int coefficient;
+            double xStart;
+            if (fenmu > 0)
+            {
+                coefficient = -1;
+                xStart = (dr + 1) / (2 * dr);
+            }
+            else
+            {
+                coefficient = 1;
+                xStart = 2 * dr / (dr + 1);
+            }
             var item = coefficient * config.ErleiIncreaseNumber;
 
             return Parallel.For(1, config.ErleiLoopCount, (i, state) =>
             {
-                var x = item * i + 2 * dr / (1 + dr);
+                var x = item * i + xStart;
                 var t = (dr * randP * (2 - x) - randP * x) / fenmu;
+
+                if (t < config.TMinimumValue) return;
+
                 var ph1 = s1 * t + randP * x;
                 var pv = s3 * t + randP;
                 var ph2 = s2 * t + randP * (2 - x);
@@ -42,7 +56,7 @@ namespace DataExtractorTool.Services
                 inputData.Pv = pv;
 
                 stopwatch.Stop();
-                // Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},S3*Dr-S1={fenmu}");
+                //Debug.WriteLine($"执行完一条耗时:{stopwatch.ElapsedMilliseconds}ms。符合条件：S1={s1},S2={s2},S3={s3},RandP={randP:F4},Dr={dr},X={x},T={t},Ph1={ph1},Ph2={ph2},Pv={pv},fenmu={fenmu}");
                 state.Stop();
             });
         }
@@ -88,8 +102,6 @@ namespace DataExtractorTool.Services
 
             var dr = inputData.Dr;
             var fenmu = inputData.S1 - inputData.S2 * dr;
-
-            var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
 
             var i = 1;
             var basenumber = 2 * dr / (1 + dr);

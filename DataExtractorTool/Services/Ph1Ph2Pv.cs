@@ -19,13 +19,24 @@ namespace DataExtractorTool.Services
             var dr = inputData.Dr;
             var fenmu = inputData.S3 * dr - inputData.S1;
 
-            var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
+            int coefficient;
+            if (fenmu > 0)
+            {
+                coefficient = -1;
+            }
+            else
+            {
+                coefficient = 1;
+            }
             var item = coefficient * config.YileiIncreaseNumber;
 
             return Parallel.For(0, config.YileiLoopCount, (i, state) =>
             {
                 var x = item * i + 1 / dr;
                 var t = randP * (1 - x * dr) / fenmu;
+
+                if (t < config.TMinimumValue) return;
+
                 var ph1 = Ph1(s1, t, randP);
                 var ph2 = Ph2(s2, t, randP, x);
                 var pv = Pv(s3, t, randP, x);

@@ -68,6 +68,8 @@
             this.Gb_RandomType = new System.Windows.Forms.GroupBox();
             this.Lb_ResultSaveType = new System.Windows.Forms.Label();
             this.Cb_ResultSaveType = new System.Windows.Forms.ComboBox();
+            this.Lb_TValue = new System.Windows.Forms.Label();
+            this.Tb_TValue = new System.Windows.Forms.TextBox();
             this.Gb_FileType.SuspendLayout();
             this.Gb_RandomType.SuspendLayout();
             this.SuspendLayout();
@@ -432,11 +434,29 @@
             this.Cb_ResultSaveType.Size = new System.Drawing.Size(118, 20);
             this.Cb_ResultSaveType.TabIndex = 38;
             // 
+            // Lb_TValue
+            // 
+            this.Lb_TValue.AutoSize = true;
+            this.Lb_TValue.Location = new System.Drawing.Point(235, 92);
+            this.Lb_TValue.Name = "Lb_TValue";
+            this.Lb_TValue.Size = new System.Drawing.Size(53, 12);
+            this.Lb_TValue.TabIndex = 39;
+            this.Lb_TValue.Text = "T最小值:";
+            // 
+            // Tb_TValue
+            // 
+            this.Tb_TValue.Location = new System.Drawing.Point(289, 89);
+            this.Tb_TValue.Name = "Tb_TValue";
+            this.Tb_TValue.Size = new System.Drawing.Size(74, 21);
+            this.Tb_TValue.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 423);
+            this.Controls.Add(this.Tb_TValue);
+            this.Controls.Add(this.Lb_TValue);
             this.Controls.Add(this.Cb_ResultSaveType);
             this.Controls.Add(this.Lb_ResultSaveType);
             this.Controls.Add(this.Gb_RandomType);
@@ -529,6 +549,8 @@
         private System.Windows.Forms.GroupBox Gb_RandomType;
         private System.Windows.Forms.Label Lb_ResultSaveType;
         private System.Windows.Forms.ComboBox Cb_ResultSaveType;
+        private System.Windows.Forms.Label Lb_TValue;
+        private System.Windows.Forms.TextBox Tb_TValue;
     }
 }
 

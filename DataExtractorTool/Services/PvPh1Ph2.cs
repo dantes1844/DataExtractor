@@ -19,13 +19,24 @@ namespace DataExtractorTool.Services
             var dr = inputData.Dr;
             var fenmu = inputData.S3 - inputData.S2 * dr;
 
-            var coefficient = ExtractCoefficient(dr, randP, s1, s2, s3, fenmu);
+            int coefficient;
+            if (fenmu > 0)
+            {
+                coefficient = -1;
+            }
+            else
+            {
+                coefficient = 1;
+            }
             var item = coefficient * config.SanleiIncreaseNumber;
 
             return Parallel.For(0, config.SanleiLoopCount, (i, state) =>
             {
                 var x = item * i + dr;
                 var t = randP * (dr - x) / fenmu;
+
+                if (t < config.TMinimumValue) return;
+
                 var pv = s3 * t + randP * x;
                 var ph1 = s1 * t + randP * (2 - x);
                 var ph2 = s2 * t + randP;

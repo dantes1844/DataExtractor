@@ -135,6 +135,8 @@ namespace DataExtractorTool
 
             #endregion
 
+
+
             #region 配置项
 
             CalculateConfig config = new CalculateConfig()
@@ -162,6 +164,15 @@ namespace DataExtractorTool
                 sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
                 sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
                 sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
+            }
+
+            #endregion
+
+            #region t的最小值
+
+            if (double.TryParse(Tb_TValue.Text, out var tValue))
+            {
+                config.TMinimumValue = tValue;
             }
 
             #endregion
@@ -448,11 +459,13 @@ namespace DataExtractorTool
         private void Rb_SingleFile_CheckedChanged(object sender, EventArgs e)
         {
             Btn_OpenFile.Text = "选择文件";
+            Tb_SourceDataPath.Text = "";
         }
 
         private void Rb_MulitpleFiles_CheckedChanged(object sender, EventArgs e)
         {
             Btn_OpenFile.Text = "选择文件夹";
+            Tb_SourceDataPath.Text = "";
         }
     }
 }

@@ -107,30 +107,58 @@ namespace DataExtractorTool.Services
             switch (resultSaveType)
             {
                 case ResultSaveType.All:
-                    using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                    using (var sr = new StreamWriter(fs))
+                    try
                     {
-                        sr.Write(txtText.ToString());
+                        using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
+                        using (var sr = new StreamWriter(fs))
+                        {
+                            sr.Write(txtText.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
                     }
 
-                    using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                    using (var sr = new StreamWriter(fs))
+                    try
                     {
-                        sr.Write(csvText.ToString());
+                        using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
+                        using (var sr = new StreamWriter(fs))
+                        {
+                            sr.Write(csvText.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
                     }
                     break;
                 case ResultSaveType.Csv:
-                    using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                    using (var sr = new StreamWriter(fs))
+                    try
                     {
-                        sr.Write(csvText.ToString());
+                        using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
+                        using (var sr = new StreamWriter(fs))
+                        {
+                            sr.Write(csvText.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
                     }
                     break;
                 case ResultSaveType.Txt:
-                    using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                    using (var sr = new StreamWriter(fs))
+                    try
                     {
-                        sr.Write(txtText.ToString());
+                        using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
+                        using (var sr = new StreamWriter(fs))
+                        {
+                            sr.Write(txtText.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
                     }
                     break;
             }
