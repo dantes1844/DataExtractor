@@ -93,41 +93,49 @@ namespace DataExtractorTool.Services
                         case ResultSaveType.All:
                             txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}{Environment.NewLine}");
                             csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}{Environment.NewLine}");
-
-                            using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                            using (var sr = new StreamWriter(fs))
-                            {
-                                sr.Write(txtText.ToString());
-                            }
-
-                            using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                            using (var sr = new StreamWriter(fs))
-                            {
-                                sr.Write(csvText.ToString());
-                            }
-
                             break;
                         case ResultSaveType.Csv:
                             csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}{Environment.NewLine}");
-
-                            using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                            using (var sr = new StreamWriter(fs))
-                            {
-                                sr.Write(csvText.ToString());
-                            }
                             break;
                         case ResultSaveType.Txt:
                             txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}{Environment.NewLine}");
-
-                            using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                            using (var sr = new StreamWriter(fs))
-                            {
-                                sr.Write(txtText.ToString());
-                            }
                             break;
                     }
                 }
             }
+
+            switch (resultSaveType)
+            {
+                case ResultSaveType.All:
+                    using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
+                    using (var sr = new StreamWriter(fs))
+                    {
+                        sr.Write(txtText.ToString());
+                    }
+
+                    using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
+                    using (var sr = new StreamWriter(fs))
+                    {
+                        sr.Write(csvText.ToString());
+                    }
+                    break;
+                case ResultSaveType.Csv:
+                    using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
+                    using (var sr = new StreamWriter(fs))
+                    {
+                        sr.Write(csvText.ToString());
+                    }
+                    break;
+                case ResultSaveType.Txt:
+                    using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
+                    using (var sr = new StreamWriter(fs))
+                    {
+                        sr.Write(txtText.ToString());
+                    }
+                    break;
+            }
+            
+
         }
     }
 }
