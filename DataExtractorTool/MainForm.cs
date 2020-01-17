@@ -41,6 +41,8 @@ namespace DataExtractorTool
             };
             Cb_DataType.DisplayMember = nameof(DataTypeList.Name);
             Cb_DataType.ValueMember = nameof(DataTypeList.Value);
+
+            Cb_ResultSaveType.DataSource = Enum.GetValues(typeof(ResultSaveType));
         }
 
         private void Btn_OpenFile_Click(object sender, EventArgs e)
@@ -178,6 +180,7 @@ namespace DataExtractorTool
         private void SingleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
         {
             _recordStack = new ConcurrentBag<InputData>();
+            var resultSaveType = (ResultSaveType)Cb_ResultSaveType.SelectedValue;
 
             #region 路径
 
@@ -282,7 +285,7 @@ namespace DataExtractorTool
                     savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                 }
 
-                FileReader.SaveBaseData(savedFile, dataList);
+                FileReader.SaveBaseData(savedFile, dataList, resultSaveType);
 
                 //文件已经保存了再设置按钮的可用状态
                 Btn_Calcualte.Invoke(new Action(() =>
@@ -316,6 +319,7 @@ namespace DataExtractorTool
 
             #endregion
 
+            var resultSaveType = (ResultSaveType)Cb_ResultSaveType.SelectedValue;
             Btn_Calcualte.Enabled = false;
             Btn_Calcualte.Text = "正在计算...";
             var type = (int)Cb_DataType.SelectedValue;
@@ -399,7 +403,7 @@ namespace DataExtractorTool
                          savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                      }
 
-                     FileReader.SaveBaseData(savedFile, dataList);
+                     FileReader.SaveBaseData(savedFile, dataList, resultSaveType);
 
                      #endregion
                  }
@@ -423,7 +427,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileReader.SaveBaseData(@"D:\yujian\test.data", new List<InputData>());
+            FileReader.SaveBaseData(@"D:\yujian\test.data", new List<InputData>(), ResultSaveType.All);
             var service = new PvPh1Ph2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;

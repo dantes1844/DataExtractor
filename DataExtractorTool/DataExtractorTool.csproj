@@ -67,6 +67,7 @@
     <Compile Include="Services\Ph1Ph2Pv.cs" />
     <Compile Include="Services\Ph1PvPh2.cs" />
     <Compile Include="Services\PvPh1Ph2.cs" />
+    <Compile Include="Services\ResultSaveType.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

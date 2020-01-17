@@ -40,32 +40,34 @@
             this.Rb_SameRandom = new System.Windows.Forms.RadioButton();
             this.Lb_Finished = new System.Windows.Forms.Label();
             this.Lb_Progress = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Lb_Slash = new System.Windows.Forms.Label();
             this.Lb_Total = new System.Windows.Forms.Label();
             this.Lb_TotalTime = new System.Windows.Forms.Label();
             this.Lb_LoopCount = new System.Windows.Forms.Label();
             this.Tb_TypeOneLoopCount = new System.Windows.Forms.TextBox();
             this.LB_LoopCountUnit = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Debug = new System.Windows.Forms.Button();
             this.Lb_DataType = new System.Windows.Forms.Label();
             this.Cb_DataType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Lb_TypeOneDeviation = new System.Windows.Forms.Label();
             this.Tb_TypeOneIncreaseNumber = new System.Windows.Forms.TextBox();
             this.Lb_TypeTwo = new System.Windows.Forms.Label();
             this.Tb_TypeTwoLoopCount = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.Lb_TypeTwoLoopCountUnit = new System.Windows.Forms.Label();
+            this.Lb_TypeTwoDeviation = new System.Windows.Forms.Label();
             this.Tb_TypeTwoIncreaseNumber = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.Lb_TypeThreeLoopCount = new System.Windows.Forms.Label();
             this.Tb_TypeThreeLoopCount = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.Lb_TypeThreeLoopCountUnit = new System.Windows.Forms.Label();
+            this.Lb_TypeThreeDeviation = new System.Windows.Forms.Label();
             this.Tb_TypeThreeIncreaseNumber = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Lb_ComputeType = new System.Windows.Forms.Label();
             this.Rb_SingleFile = new System.Windows.Forms.RadioButton();
             this.Rb_MulitpleFiles = new System.Windows.Forms.RadioButton();
             this.Gb_FileType = new System.Windows.Forms.GroupBox();
             this.Gb_RandomType = new System.Windows.Forms.GroupBox();
+            this.Lb_ResultSaveType = new System.Windows.Forms.Label();
+            this.Cb_ResultSaveType = new System.Windows.Forms.ComboBox();
             this.Gb_FileType.SuspendLayout();
             this.Gb_RandomType.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +108,7 @@
             // 
             // Btn_Calcualte
             // 
-            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 322);
+            this.Btn_Calcualte.Location = new System.Drawing.Point(356, 373);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
             this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
             this.Btn_Calcualte.TabIndex = 14;
@@ -126,7 +128,7 @@
             // LB_RandomWay
             // 
             this.LB_RandomWay.AutoSize = true;
-            this.LB_RandomWay.Location = new System.Drawing.Point(39, 230);
+            this.LB_RandomWay.Location = new System.Drawing.Point(39, 228);
             this.LB_RandomWay.Name = "LB_RandomWay";
             this.LB_RandomWay.Size = new System.Drawing.Size(71, 12);
             this.LB_RandomWay.TabIndex = 16;
@@ -157,7 +159,7 @@
             // Lb_Finished
             // 
             this.Lb_Finished.AutoSize = true;
-            this.Lb_Finished.Location = new System.Drawing.Point(118, 300);
+            this.Lb_Finished.Location = new System.Drawing.Point(118, 342);
             this.Lb_Finished.Name = "Lb_Finished";
             this.Lb_Finished.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Lb_Finished.Size = new System.Drawing.Size(11, 12);
@@ -168,25 +170,25 @@
             // Lb_Progress
             // 
             this.Lb_Progress.AutoSize = true;
-            this.Lb_Progress.Location = new System.Drawing.Point(51, 300);
+            this.Lb_Progress.Location = new System.Drawing.Point(51, 342);
             this.Lb_Progress.Name = "Lb_Progress";
             this.Lb_Progress.Size = new System.Drawing.Size(59, 12);
             this.Lb_Progress.TabIndex = 20;
             this.Lb_Progress.Text = "当前进度:";
             // 
-            // label1
+            // Lb_Slash
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(160, 300);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(11, 12);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "/";
+            this.Lb_Slash.AutoSize = true;
+            this.Lb_Slash.Location = new System.Drawing.Point(160, 342);
+            this.Lb_Slash.Name = "Lb_Slash";
+            this.Lb_Slash.Size = new System.Drawing.Size(11, 12);
+            this.Lb_Slash.TabIndex = 21;
+            this.Lb_Slash.Text = "/";
             // 
             // Lb_Total
             // 
             this.Lb_Total.AutoSize = true;
-            this.Lb_Total.Location = new System.Drawing.Point(172, 300);
+            this.Lb_Total.Location = new System.Drawing.Point(172, 342);
             this.Lb_Total.Name = "Lb_Total";
             this.Lb_Total.Size = new System.Drawing.Size(11, 12);
             this.Lb_Total.TabIndex = 22;
@@ -195,7 +197,7 @@
             // Lb_TotalTime
             // 
             this.Lb_TotalTime.AutoSize = true;
-            this.Lb_TotalTime.Location = new System.Drawing.Point(223, 300);
+            this.Lb_TotalTime.Location = new System.Drawing.Point(223, 342);
             this.Lb_TotalTime.Name = "Lb_TotalTime";
             this.Lb_TotalTime.Size = new System.Drawing.Size(0, 12);
             this.Lb_TotalTime.TabIndex = 23;
@@ -226,17 +228,17 @@
             this.LB_LoopCountUnit.TabIndex = 26;
             this.LB_LoopCountUnit.Text = "万(次)";
             // 
-            // button1
+            // Btn_Debug
             // 
-            this.button1.Location = new System.Drawing.Point(59, 322);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 41);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_Debug.Location = new System.Drawing.Point(59, 373);
+            this.Btn_Debug.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_Debug.Name = "Btn_Debug";
+            this.Btn_Debug.Size = new System.Drawing.Size(68, 41);
+            this.Btn_Debug.TabIndex = 27;
+            this.Btn_Debug.Text = "调试";
+            this.Btn_Debug.UseVisualStyleBackColor = true;
+            this.Btn_Debug.Visible = false;
+            this.Btn_Debug.Click += new System.EventHandler(this.button1_Click);
             // 
             // Lb_DataType
             // 
@@ -256,14 +258,14 @@
             this.Cb_DataType.Size = new System.Drawing.Size(121, 20);
             this.Cb_DataType.TabIndex = 29;
             // 
-            // label2
+            // Lb_TypeOneDeviation
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(241, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "修正值:";
+            this.Lb_TypeOneDeviation.AutoSize = true;
+            this.Lb_TypeOneDeviation.Location = new System.Drawing.Point(241, 121);
+            this.Lb_TypeOneDeviation.Name = "Lb_TypeOneDeviation";
+            this.Lb_TypeOneDeviation.Size = new System.Drawing.Size(47, 12);
+            this.Lb_TypeOneDeviation.TabIndex = 30;
+            this.Lb_TypeOneDeviation.Text = "修正值:";
             // 
             // Tb_TypeOneIncreaseNumber
             // 
@@ -290,23 +292,23 @@
             this.Tb_TypeTwoLoopCount.TabIndex = 25;
             this.Tb_TypeTwoLoopCount.Text = "200";
             // 
-            // label4
+            // Lb_TypeTwoLoopCountUnit
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(194, 153);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "万(次)";
+            this.Lb_TypeTwoLoopCountUnit.AutoSize = true;
+            this.Lb_TypeTwoLoopCountUnit.Location = new System.Drawing.Point(194, 153);
+            this.Lb_TypeTwoLoopCountUnit.Name = "Lb_TypeTwoLoopCountUnit";
+            this.Lb_TypeTwoLoopCountUnit.Size = new System.Drawing.Size(41, 12);
+            this.Lb_TypeTwoLoopCountUnit.TabIndex = 26;
+            this.Lb_TypeTwoLoopCountUnit.Text = "万(次)";
             // 
-            // label5
+            // Lb_TypeTwoDeviation
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(241, 153);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 12);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "修正值:";
+            this.Lb_TypeTwoDeviation.AutoSize = true;
+            this.Lb_TypeTwoDeviation.Location = new System.Drawing.Point(241, 153);
+            this.Lb_TypeTwoDeviation.Name = "Lb_TypeTwoDeviation";
+            this.Lb_TypeTwoDeviation.Size = new System.Drawing.Size(47, 12);
+            this.Lb_TypeTwoDeviation.TabIndex = 30;
+            this.Lb_TypeTwoDeviation.Text = "修正值:";
             // 
             // Tb_TypeTwoIncreaseNumber
             // 
@@ -316,14 +318,14 @@
             this.Tb_TypeTwoIncreaseNumber.TabIndex = 31;
             this.Tb_TypeTwoIncreaseNumber.Text = "0.00001";
             // 
-            // label6
+            // Lb_TypeThreeLoopCount
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 186);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 12);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "三类遍历次数:";
+            this.Lb_TypeThreeLoopCount.AutoSize = true;
+            this.Lb_TypeThreeLoopCount.Location = new System.Drawing.Point(28, 186);
+            this.Lb_TypeThreeLoopCount.Name = "Lb_TypeThreeLoopCount";
+            this.Lb_TypeThreeLoopCount.Size = new System.Drawing.Size(83, 12);
+            this.Lb_TypeThreeLoopCount.TabIndex = 24;
+            this.Lb_TypeThreeLoopCount.Text = "三类遍历次数:";
             // 
             // Tb_TypeThreeLoopCount
             // 
@@ -333,23 +335,23 @@
             this.Tb_TypeThreeLoopCount.TabIndex = 25;
             this.Tb_TypeThreeLoopCount.Text = "200";
             // 
-            // label7
+            // Lb_TypeThreeLoopCountUnit
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(194, 186);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "万(次)";
+            this.Lb_TypeThreeLoopCountUnit.AutoSize = true;
+            this.Lb_TypeThreeLoopCountUnit.Location = new System.Drawing.Point(194, 186);
+            this.Lb_TypeThreeLoopCountUnit.Name = "Lb_TypeThreeLoopCountUnit";
+            this.Lb_TypeThreeLoopCountUnit.Size = new System.Drawing.Size(41, 12);
+            this.Lb_TypeThreeLoopCountUnit.TabIndex = 26;
+            this.Lb_TypeThreeLoopCountUnit.Text = "万(次)";
             // 
-            // label8
+            // Lb_TypeThreeDeviation
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(241, 186);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 12);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "修正值:";
+            this.Lb_TypeThreeDeviation.AutoSize = true;
+            this.Lb_TypeThreeDeviation.Location = new System.Drawing.Point(241, 186);
+            this.Lb_TypeThreeDeviation.Name = "Lb_TypeThreeDeviation";
+            this.Lb_TypeThreeDeviation.Size = new System.Drawing.Size(47, 12);
+            this.Lb_TypeThreeDeviation.TabIndex = 30;
+            this.Lb_TypeThreeDeviation.Text = "修正值:";
             // 
             // Tb_TypeThreeIncreaseNumber
             // 
@@ -359,14 +361,14 @@
             this.Tb_TypeThreeIncreaseNumber.TabIndex = 31;
             this.Tb_TypeThreeIncreaseNumber.Text = "0.00001";
             // 
-            // label3
+            // Lb_ComputeType
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "计算方式:";
+            this.Lb_ComputeType.AutoSize = true;
+            this.Lb_ComputeType.Location = new System.Drawing.Point(51, 27);
+            this.Lb_ComputeType.Name = "Lb_ComputeType";
+            this.Lb_ComputeType.Size = new System.Drawing.Size(59, 12);
+            this.Lb_ComputeType.TabIndex = 32;
+            this.Lb_ComputeType.Text = "计算方式:";
             // 
             // Rb_SingleFile
             // 
@@ -412,35 +414,55 @@
             this.Gb_RandomType.TabIndex = 36;
             this.Gb_RandomType.TabStop = false;
             // 
+            // Lb_ResultSaveType
+            // 
+            this.Lb_ResultSaveType.AutoSize = true;
+            this.Lb_ResultSaveType.Location = new System.Drawing.Point(27, 304);
+            this.Lb_ResultSaveType.Name = "Lb_ResultSaveType";
+            this.Lb_ResultSaveType.Size = new System.Drawing.Size(83, 12);
+            this.Lb_ResultSaveType.TabIndex = 37;
+            this.Lb_ResultSaveType.Text = "结果保存方式:";
+            // 
+            // Cb_ResultSaveType
+            // 
+            this.Cb_ResultSaveType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cb_ResultSaveType.FormattingEnabled = true;
+            this.Cb_ResultSaveType.Location = new System.Drawing.Point(117, 304);
+            this.Cb_ResultSaveType.Name = "Cb_ResultSaveType";
+            this.Cb_ResultSaveType.Size = new System.Drawing.Size(118, 20);
+            this.Cb_ResultSaveType.TabIndex = 38;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 374);
+            this.ClientSize = new System.Drawing.Size(460, 423);
+            this.Controls.Add(this.Cb_ResultSaveType);
+            this.Controls.Add(this.Lb_ResultSaveType);
             this.Controls.Add(this.Gb_RandomType);
             this.Controls.Add(this.Gb_FileType);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Lb_ComputeType);
             this.Controls.Add(this.Tb_TypeThreeIncreaseNumber);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.Lb_TypeThreeDeviation);
             this.Controls.Add(this.Tb_TypeTwoIncreaseNumber);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.Lb_TypeTwoDeviation);
             this.Controls.Add(this.Tb_TypeOneIncreaseNumber);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Lb_TypeOneDeviation);
             this.Controls.Add(this.Cb_DataType);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.Lb_TypeThreeLoopCountUnit);
             this.Controls.Add(this.Lb_DataType);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.Lb_TypeTwoLoopCountUnit);
             this.Controls.Add(this.Tb_TypeThreeLoopCount);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Btn_Debug);
             this.Controls.Add(this.Tb_TypeTwoLoopCount);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.Lb_TypeThreeLoopCount);
             this.Controls.Add(this.LB_LoopCountUnit);
             this.Controls.Add(this.Lb_TypeTwo);
             this.Controls.Add(this.Tb_TypeOneLoopCount);
             this.Controls.Add(this.Lb_LoopCount);
             this.Controls.Add(this.Lb_TotalTime);
             this.Controls.Add(this.Lb_Total);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Lb_Slash);
             this.Controls.Add(this.Lb_Progress);
             this.Controls.Add(this.Lb_Finished);
             this.Controls.Add(this.LB_RandomWay);
@@ -479,32 +501,34 @@
         private System.Windows.Forms.RadioButton Rb_SameRandom;
         private System.Windows.Forms.Label Lb_Finished;
         private System.Windows.Forms.Label Lb_Progress;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lb_Slash;
         private System.Windows.Forms.Label Lb_Total;
         private System.Windows.Forms.Label Lb_TotalTime;
         private System.Windows.Forms.Label Lb_LoopCount;
         private System.Windows.Forms.TextBox Tb_TypeOneLoopCount;
         private System.Windows.Forms.Label LB_LoopCountUnit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_Debug;
         private System.Windows.Forms.Label Lb_DataType;
         private System.Windows.Forms.ComboBox Cb_DataType;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Lb_TypeOneDeviation;
         private System.Windows.Forms.TextBox Tb_TypeOneIncreaseNumber;
         private System.Windows.Forms.Label Lb_TypeTwo;
         private System.Windows.Forms.TextBox Tb_TypeTwoLoopCount;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label Lb_TypeTwoLoopCountUnit;
+        private System.Windows.Forms.Label Lb_TypeTwoDeviation;
         private System.Windows.Forms.TextBox Tb_TypeTwoIncreaseNumber;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Lb_TypeThreeLoopCount;
         private System.Windows.Forms.TextBox Tb_TypeThreeLoopCount;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label Lb_TypeThreeLoopCountUnit;
+        private System.Windows.Forms.Label Lb_TypeThreeDeviation;
         private System.Windows.Forms.TextBox Tb_TypeThreeIncreaseNumber;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Lb_ComputeType;
         private System.Windows.Forms.RadioButton Rb_SingleFile;
         private System.Windows.Forms.RadioButton Rb_MulitpleFiles;
         private System.Windows.Forms.GroupBox Gb_FileType;
         private System.Windows.Forms.GroupBox Gb_RandomType;
+        private System.Windows.Forms.Label Lb_ResultSaveType;
+        private System.Windows.Forms.ComboBox Cb_ResultSaveType;
     }
 }
 
