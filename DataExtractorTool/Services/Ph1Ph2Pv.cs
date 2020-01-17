@@ -26,9 +26,9 @@ namespace DataExtractorTool.Services
             {
                 var x = item * i + 1 / dr;
                 var t = randP * (1 - x * dr) / fenmu;
-                var ph1 = s1 * t + randP;
-                var ph2 = s2 * t + randP * (2 - x);
-                var pv = s3 * t + randP * x;
+                var ph1 = Ph1(s1, t, randP);
+                var ph2 = Ph2(s2, t, randP, x);
+                var pv = Pv(s3, t, randP, x);
 
                 var flag1 = ph1 > ph2 + config.DefaultDeviation && ph2 > pv + config.DefaultDeviation;
                 var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
@@ -47,18 +47,38 @@ namespace DataExtractorTool.Services
             });
         }
 
+        private static double T(double randP, double x, double dr, double fenmu)
+        {
+            return randP * (1 - x * dr) / fenmu;
+        }
+
+        private static double Ph1(double s1, double t, double randP)
+        {
+            return s1 * t + randP;
+        }
+
+        private static double Ph2(double s2, double t, double randP, double x)
+        {
+            return s2 * t + randP * (2 - x);
+        }
+
+        private static double Pv(double s3, double t, double randP, double x)
+        {
+            return s3 * t + randP * x;
+        }
+
         private static int ExtractCoefficient(double dr, double randP, double s1, double s2, double s3, double fenmu)
         {
             var leftX = 1 / dr - 1;
-            var leftT = randP * (1 - leftX * dr) / fenmu;
-            var leftPh1 = s1 * leftT + randP;
-            var leftPh2 = s2 * leftT + randP * (2 - leftX);
+            var leftT = T(randP, leftX, dr, fenmu);
+            var leftPh1 = Ph1(s1, leftT, randP);
+            var leftPh2 = Ph2(s2, leftT, randP, leftX);
             var left = leftPh1 - leftPh2;
 
             var rightX = 1 / dr + 1;
-            var rightT = randP * (1 - rightX * dr) / fenmu;
-            var rightPh1 = s1 * rightT + randP;
-            var rightPh2 = s2 * rightT + randP * (2 - rightX);
+            var rightT = T(randP, rightX, dr, fenmu);
+            var rightPh1 = Ph1(s1, rightT, randP);
+            var rightPh2 = Ph2(s2, rightT, randP, rightX);
             var right = rightPh1 - rightPh2;
 
             var coefficient = 1;
@@ -89,10 +109,10 @@ namespace DataExtractorTool.Services
             var x = -714.698 + item;
             while (true)
             {
-                var t = randP * (1 - x * dr) / fenmu;
-                var ph1 = s1 * t + randP;
-                var ph2 = s2 * t + randP * (2 - x);
-                var pv = s3 * t + randP * x;
+                var t = T(randP, x, dr, fenmu);
+                var ph1 = Ph1(s1, t, randP);
+                var ph2 = Ph2(s2, t, randP, x);
+                var pv = Pv(s3, t, randP, x);
 
                 var flag1 = ph1 > ph2 + 2 && ph2 > pv + 2;
                 var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
