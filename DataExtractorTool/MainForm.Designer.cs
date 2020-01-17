@@ -208,7 +208,7 @@
             this.Tb_TypeOneLoopCount.Name = "Tb_TypeOneLoopCount";
             this.Tb_TypeOneLoopCount.Size = new System.Drawing.Size(72, 21);
             this.Tb_TypeOneLoopCount.TabIndex = 25;
-            this.Tb_TypeOneLoopCount.Text = "20";
+            this.Tb_TypeOneLoopCount.Text = "200";
             // 
             // LB_LoopCountUnit
             // 
@@ -323,7 +323,7 @@
             this.Tb_TypeThreeLoopCount.Name = "Tb_TypeThreeLoopCount";
             this.Tb_TypeThreeLoopCount.Size = new System.Drawing.Size(72, 21);
             this.Tb_TypeThreeLoopCount.TabIndex = 25;
-            this.Tb_TypeThreeLoopCount.Text = "20";
+            this.Tb_TypeThreeLoopCount.Text = "200";
             // 
             // label7
             // 
@@ -349,7 +349,7 @@
             this.Tb_TypeThreeIncreaseNumber.Name = "Tb_TypeThreeIncreaseNumber";
             this.Tb_TypeThreeIncreaseNumber.Size = new System.Drawing.Size(74, 21);
             this.Tb_TypeThreeIncreaseNumber.TabIndex = 31;
-            this.Tb_TypeThreeIncreaseNumber.Text = "0.1";
+            this.Tb_TypeThreeIncreaseNumber.Text = "0.00001";
             // 
             // MainForm
             // 
