@@ -217,7 +217,7 @@ namespace DataExtractorTool
                         }
 
                         service?.ParallelRun(config, inputData);
-                        if (!_recordStack.Contains(inputData)) { _recordStack.Add(inputData); }
+                        _recordStack.Add(inputData);
 
 
                         if (_recordStack.Count % 1000 == 0)
