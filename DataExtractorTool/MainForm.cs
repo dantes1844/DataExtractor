@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,41 +45,40 @@ namespace DataExtractorTool
 
         private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
-            FileDialog fileDialog = new OpenFileDialog();
-            var dialogResult = fileDialog.ShowDialog();
-            if (dialogResult != DialogResult.OK)
+            if (Rb_SingleFile.Checked)
             {
-                return;
-            }
+                var fileDialog = new OpenFileDialog();
+                var dialogResult = fileDialog.ShowDialog();
+                if (dialogResult != DialogResult.OK)
+                {
+                    return;
+                }
 
-            Tb_SourceDataPath.Text = fileDialog.FileName;
+                Tb_SourceDataPath.Text = fileDialog.FileName;
+            }
+            else if (Rb_MulitpleFiles.Checked)
+            {
+                var fileDialog = new FolderBrowserDialog()
+                {
+                    SelectedPath = AppDomain.CurrentDomain.BaseDirectory
+                };
+
+                var dialogResult = fileDialog.ShowDialog();
+                if (dialogResult != DialogResult.OK)
+                {
+                    return;
+                }
+
+                Tb_SourceDataPath.Text = fileDialog.SelectedPath;
+            }
         }
 
 
         private ConcurrentBag<InputData> _recordStack;
         private const int LoopCountBase = 10000;
+
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
-            _recordStack = new ConcurrentBag<InputData>();
-
-            #region 路径
-
-            var path = Tb_SourceDataPath.Text.Trim();
-            if (string.IsNullOrEmpty(path))
-            {
-                MessageBox.Show("路径不能空撒", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Tb_SourceDataPath.Focus();
-                return;
-            }
-            var dataList = FileReader.ReadBaseData(path);
-            if (dataList.Count == 0)
-            {
-                MessageBox.Show("指定的文件没有读取到合法数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            #endregion
-
             #region 差值
 
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
@@ -96,11 +96,13 @@ namespace DataExtractorTool
                 MessageBox.Show("一类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!double.TryParse(Tb_TypeTwoIncreaseNumber.Text, out double twoIncrease))
             {
                 MessageBox.Show("二类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!double.TryParse(Tb_TypeThreeIncreaseNumber.Text, out double threeIncrease))
             {
                 MessageBox.Show("三类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -116,11 +118,13 @@ namespace DataExtractorTool
                 MessageBox.Show("一类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!int.TryParse(Tb_TypeTwoLoopCount.Text, out var twoLoopCount))
             {
                 MessageBox.Show("二类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!int.TryParse(Tb_TypeThreeLoopCount.Text, out var threeLoopCount))
             {
                 MessageBox.Show("三类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -159,6 +163,42 @@ namespace DataExtractorTool
             }
 
             #endregion
+
+            if (Rb_SingleFile.Checked)
+            {
+                SingleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
+            }
+            else if (Rb_MulitpleFiles.Checked)
+            {
+                MulitipleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
+            }
+
+        }
+
+        private void SingleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
+        {
+            _recordStack = new ConcurrentBag<InputData>();
+
+            #region 路径
+
+            var path = Tb_SourceDataPath.Text.Trim();
+            if (string.IsNullOrEmpty(path))
+            {
+                MessageBox.Show("路径不能空撒", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_SourceDataPath.Focus();
+                return;
+            }
+
+            var dataList = FileReader.ReadBaseData(path);
+            if (dataList.Count == 0)
+            {
+                MessageBox.Show("指定的文件没有读取到合法数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            #endregion
+
+            #region 计算
 
             Btn_Calcualte.Enabled = false;
             Btn_Calcualte.Text = "正在计算...";
@@ -223,24 +263,15 @@ namespace DataExtractorTool
 
                         if (_recordStack.Count % 1000 == 0)
                         {
-                            Lb_Finished.Invoke(new Action(() =>
-                            {
-                                Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString();
-                            }));
+                            Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
 
-                            Lb_TotalTime.Invoke(new Action(() =>
-                            {
-                                Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)";
-                            }));
+                            Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = $"(耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)"; }));
                             Debug.WriteLine($"当前执行完成了{_recordStack.Count}.耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)");
                         }
-
                     });
                 }
-                Lb_Finished.Invoke(new Action(() =>
-                {
-                    Lb_Finished.Text = _recordStack.Count().ToString();
-                }));
+
+                Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count().ToString(); }));
 
                 var fileInfo = new FileInfo(path);
                 var dotPosition = fileInfo.Name.LastIndexOf(".");
@@ -250,6 +281,7 @@ namespace DataExtractorTool
                 {
                     savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                 }
+
                 FileReader.SaveBaseData(savedFile, dataList);
 
                 //文件已经保存了再设置按钮的可用状态
@@ -266,11 +298,127 @@ namespace DataExtractorTool
                     Process.Start("explorer.exe", $@"/select,{savedFile}");
                 }
             });
+
+            #endregion
         }
 
-        private void Cb_MaximumParameter_SelectedIndexChanged(object sender, EventArgs e)
+        private void MulitipleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
         {
+            #region 路径
 
+            var selectedDirectory = Tb_SourceDataPath.Text.Trim();
+            if (string.IsNullOrEmpty(selectedDirectory))
+            {
+                MessageBox.Show("路径不能空撒", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_SourceDataPath.Focus();
+                return;
+            }
+
+            #endregion
+
+            Btn_Calcualte.Enabled = false;
+            Btn_Calcualte.Text = "正在计算...";
+            var type = (int)Cb_DataType.SelectedValue;
+
+            Task.Run(() =>
+             {
+                 var files = Directory.GetFiles(selectedDirectory, "*.dat");
+                 foreach (var file in files)
+                 {
+                     _recordStack = new ConcurrentBag<InputData>();
+
+                     var fileinfo = new FileInfo(file);
+
+                     var dataList = FileReader.ReadBaseData(file);
+
+                     #region 计算
+
+                     Debug.WriteLine($"file:{fileinfo.Name}.一类:{dataList.Count(c => c.DataType == DataType.Yilei)},二类:{dataList.Count(c => c.DataType == DataType.Erlei)},三类:{dataList.Count(c => c.DataType == DataType.Sanlei)}");
+                     if (type > 0)
+                     {
+                         var dataType = (DataType)type;
+                         dataList = dataList.Where(c => c.DataType == dataType).ToList();
+                     }
+                     Lb_Total.Invoke(new Action(() =>
+                     {
+                         Lb_Total.Text = dataList.Count.ToString();
+                     }));
+
+                     Stopwatch stopwatch = Stopwatch.StartNew();
+
+                     //foreach (var inputData in dataList)
+                     //{
+
+                     //}
+                     var result = Parallel.ForEach(dataList, inputData =>
+                     {
+                         CalculateBase service;
+                         switch (inputData.DataType)
+                         {
+                             case DataType.Yilei:
+                                 inputData.RandP = sameRandomNumber1;
+                                 service = new Ph1Ph2Pv();
+                                 break;
+                             case DataType.Erlei:
+                                 inputData.RandP = sameRandomNumber2;
+                                 service = new Ph1PvPh2();
+                                 break;
+                             case DataType.Sanlei:
+                                 inputData.RandP = sameRandomNumber3;
+                                 service = new PvPh1Ph2();
+                                 break;
+                             default:
+                                 service = null;
+                                 break;
+                         }
+
+                         if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+                         {
+                             var random = new Random((int)DateTime.Now.Ticks);
+                             var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
+                             inputData.RandP = rp + inputData.RandomNumberStart;
+                         }
+
+                         service?.ParallelRun(config, inputData);
+                         _recordStack.Add(inputData);
+
+                         Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
+                         Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = $"(正在计算:{fileinfo.Name})"; }));
+                         Debug.WriteLine($"正在计算{fileinfo.Name},当前执行完成了{_recordStack.Count}.耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)");
+
+                     });
+
+                     Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count().ToString(); }));
+
+                     var fileInfo = new FileInfo(file);
+                     var dotPosition = fileInfo.Name.LastIndexOf(".");
+
+                     var savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name.Insert(dotPosition, ".result")}");
+                     if (dotPosition < 0)
+                     {
+                         savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
+                     }
+
+                     FileReader.SaveBaseData(savedFile, dataList);
+
+                     #endregion
+                 }
+             }).ContinueWith(task =>
+            {
+                //文件已经保存了再设置按钮的可用状态
+                Btn_Calcualte.Invoke(new Action(() =>
+                {
+                    Btn_Calcualte.Enabled = true;
+                    Btn_Calcualte.Text = "计算";
+                }));
+
+                var openFileConfirm = MessageBox.Show("计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
+                if (openFileConfirm == DialogResult.Yes)
+                {
+                    Process.Start("explorer.exe", selectedDirectory);
+                }
+            });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -291,6 +439,16 @@ namespace DataExtractorTool
                 RandP = sameRandomNumber3
             };
             service.FindOne(inputData);
+        }
+
+        private void Rb_SingleFile_CheckedChanged(object sender, EventArgs e)
+        {
+            Btn_OpenFile.Text = "选择文件";
+        }
+
+        private void Rb_MulitpleFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            Btn_OpenFile.Text = "选择文件夹";
         }
     }
 }
