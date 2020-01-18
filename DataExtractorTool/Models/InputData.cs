@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataExtractorTool.Services
+﻿namespace DataExtractorTool.Models
 {
     public class InputData
     {

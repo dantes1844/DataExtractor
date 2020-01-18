@@ -60,15 +60,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomSample.cs" />
+    <Compile Include="Models\DataTypeList.cs" />
+    <Compile Include="ThreadSafeRandom.cs" />
     <Compile Include="Services\CalculateBase.cs" />
-    <Compile Include="Services\CalculateConfig.cs" />
+    <Compile Include="Models\CalculateConfig.cs" />
     <Compile Include="Services\FileHelper.cs" />
-    <Compile Include="Services\InputData.cs" />
+    <Compile Include="Models\InputData.cs" />
     <Compile Include="Services\Ph1Ph2Pv.cs" />
     <Compile Include="Services\Ph1PvPh2.cs" />
     <Compile Include="Services\PvPh1Ph2.cs" />
-    <Compile Include="Services\ResultSaveType.cs" />
+    <Compile Include="Models\ResultSaveType.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

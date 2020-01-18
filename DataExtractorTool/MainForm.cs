@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataExtractorTool.Models;
 using DataExtractorTool.Services;
 
 namespace DataExtractorTool
@@ -23,14 +24,7 @@ namespace DataExtractorTool
             InitializeComponent();
         }
 
-        class DataTypeList
-        {
-            public string Name { get; set; }
-
-            public int Value { get; set; }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             Cb_DataType.DataSource = new List<DataTypeList>()
             {

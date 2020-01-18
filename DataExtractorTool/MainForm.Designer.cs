@@ -425,7 +425,7 @@
             // Lb_ResultSaveType
             // 
             this.Lb_ResultSaveType.AutoSize = true;
-            this.Lb_ResultSaveType.Location = new System.Drawing.Point(228, 250);
+            this.Lb_ResultSaveType.Location = new System.Drawing.Point(228, 247);
             this.Lb_ResultSaveType.Name = "Lb_ResultSaveType";
             this.Lb_ResultSaveType.Size = new System.Drawing.Size(83, 12);
             this.Lb_ResultSaveType.TabIndex = 37;
@@ -559,7 +559,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据计算";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Gb_FileType.ResumeLayout(false);
             this.Gb_FileType.PerformLayout();
             this.Gb_RandomType.ResumeLayout(false);

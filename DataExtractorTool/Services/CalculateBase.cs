@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DataExtractorTool.Models;
 
 namespace DataExtractorTool.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace DataExtractorTool.Services
+﻿namespace DataExtractorTool.Models
 {
     public enum ResultSaveType
     {
