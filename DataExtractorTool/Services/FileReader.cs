@@ -107,63 +107,34 @@ namespace DataExtractorTool.Services
             switch (resultSaveType)
             {
                 case ResultSaveType.All:
-                    try
-                    {
-                        using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                        using (var sr = new StreamWriter(fs))
-                        {
-                            sr.Write(txtText.ToString());
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-
-                    try
-                    {
-                        using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                        using (var sr = new StreamWriter(fs))
-                        {
-                            sr.Write(csvText.ToString());
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                    SaveFile(defaultFile, txtText.ToString());
+                    SaveFile(defaultFile + ".csv", csvText.ToString());
                     break;
                 case ResultSaveType.Csv:
-                    try
-                    {
-                        using (FileStream fs = new FileStream(defaultFile + ".csv", FileMode.Create))
-                        using (var sr = new StreamWriter(fs))
-                        {
-                            sr.Write(csvText.ToString());
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                    SaveFile(defaultFile + ".csv", csvText.ToString());
                     break;
                 case ResultSaveType.Txt:
-                    try
-                    {
-                        using (FileStream fs = new FileStream(defaultFile, FileMode.Create))
-                        using (var sr = new StreamWriter(fs))
-                        {
-                            sr.Write(txtText.ToString());
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                    SaveFile(defaultFile, txtText.ToString());
                     break;
             }
-            
 
+
+        }
+
+        private static void SaveFile(string path, string text)
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(path, FileMode.Create))
+                using (var sr = new StreamWriter(fs))
+                {
+                    sr.Write(text);
+                }
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
         }
     }
 }
