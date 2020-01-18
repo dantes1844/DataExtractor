@@ -81,12 +81,33 @@ namespace DataExtractorTool
 
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
+            var config = new CalculateConfig();
             #region 差值
 
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
             {
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+            config.DefaultDeviation = deviation;
+
+            #endregion
+
+            #region X值
+
+            if (double.TryParse(Tb_TypeOneDefaultX.Text, out double typeOneDefaultX))
+            {
+                config.TypeOneDefaultX = typeOneDefaultX;
+            }
+
+            if (double.TryParse(Tb_TypeTwoDefaultX.Text, out double typeTwoDefaultX))
+            {
+                config.TypeTwoDefaultX = typeTwoDefaultX;
+            }
+
+            if (double.TryParse(Lb_TypeThreeDefaultX.Text, out double typeThreeDefaultX))
+            {
+                config.TypeThreeDefaultX = typeThreeDefaultX;
             }
 
             #endregion
@@ -98,57 +119,51 @@ namespace DataExtractorTool
                 MessageBox.Show("一类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.YileiIncreaseNumber = oneIncrease;
 
             if (!double.TryParse(Tb_TypeTwoIncreaseNumber.Text, out double twoIncrease))
             {
                 MessageBox.Show("二类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.ErleiIncreaseNumber = twoIncrease;
 
             if (!double.TryParse(Tb_TypeThreeIncreaseNumber.Text, out double threeIncrease))
             {
                 MessageBox.Show("三类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.SanleiIncreaseNumber = threeIncrease;
 
             #endregion
 
             #region 次数
 
-            if (!int.TryParse(Tb_TypeOneLoopCount.Text, out var loopCount))
+            if (!int.TryParse(Tb_TypeOneLoopCount.Text, out var oneLoopCount))
             {
                 MessageBox.Show("一类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.YileiLoopCount = oneLoopCount * LoopCountBase;
 
             if (!int.TryParse(Tb_TypeTwoLoopCount.Text, out var twoLoopCount))
             {
                 MessageBox.Show("二类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.ErleiLoopCount = twoLoopCount * LoopCountBase;
 
             if (!int.TryParse(Tb_TypeThreeLoopCount.Text, out var threeLoopCount))
             {
                 MessageBox.Show("三类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            config.SanleiLoopCount = threeLoopCount * LoopCountBase;
 
             #endregion
 
-
-
             #region 配置项
 
-            CalculateConfig config = new CalculateConfig()
-            {
-                DefaultDeviation = deviation,
-                YileiLoopCount = loopCount * LoopCountBase,
-                YileiIncreaseNumber = oneIncrease,
-                ErleiLoopCount = twoLoopCount * LoopCountBase,
-                ErleiIncreaseNumber = twoIncrease,
-                SanleiLoopCount = threeLoopCount * LoopCountBase,
-                SanleiIncreaseNumber = threeIncrease,
-            };
 
             if (Rb_RandomPerRecord.Checked)
             {

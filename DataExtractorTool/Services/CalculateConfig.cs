@@ -33,11 +33,25 @@
         /// </summary>
         public double DefaultDeviation { get; set; } = 2;
 
-
         /// <summary>
         /// T的最小值
         /// </summary>
         public double? TMinimumValue { get; set; }
+
+        /// <summary>
+        /// 一类数据x值的默认初始值
+        /// </summary>
+        public double? TypeOneDefaultX { get; set; }
+
+        /// <summary>
+        /// 二类x值的默认初始值
+        /// </summary>
+        public double? TypeTwoDefaultX { get; set; }
+
+        /// <summary>
+        /// 三类x值的默认初始值
+        /// </summary>
+        public double? TypeThreeDefaultX { get; set; }
     }
 
     public enum RandomNumberType

@@ -29,10 +29,11 @@ namespace DataExtractorTool.Services
                 coefficient = 1;
             }
             var item = coefficient * config.YileiIncreaseNumber;
+            var start = config.TypeOneDefaultX ?? 1 / dr;
 
             return Parallel.For(0, config.YileiLoopCount, (i, state) =>
             {
-                var x = item * i + 1 / dr;
+                var x = item * i + start;
                 var t = randP * (1 - x * dr) / fenmu;
 
                 if (t < config.TMinimumValue) return;

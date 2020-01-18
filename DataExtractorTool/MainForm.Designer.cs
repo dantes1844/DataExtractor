@@ -70,6 +70,12 @@
             this.Cb_ResultSaveType = new System.Windows.Forms.ComboBox();
             this.Lb_TValue = new System.Windows.Forms.Label();
             this.Tb_TValue = new System.Windows.Forms.TextBox();
+            this.Lb_TypeOneDefaultX = new System.Windows.Forms.Label();
+            this.Tb_TypeOneDefaultX = new System.Windows.Forms.TextBox();
+            this.Lb_TypeTwoDefaultX = new System.Windows.Forms.Label();
+            this.Tb_TypeTwoDefaultX = new System.Windows.Forms.TextBox();
+            this.Lb_TypeThreeDefaultX = new System.Windows.Forms.Label();
+            this.Tb_TypeThreeDefaultX = new System.Windows.Forms.TextBox();
             this.Gb_FileType.SuspendLayout();
             this.Gb_RandomType.SuspendLayout();
             this.SuspendLayout();
@@ -104,7 +110,7 @@
             // 
             this.Tb_Ph2MinusPv.Location = new System.Drawing.Point(116, 89);
             this.Tb_Ph2MinusPv.Name = "Tb_Ph2MinusPv";
-            this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(57, 21);
+            this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(77, 21);
             this.Tb_Ph2MinusPv.TabIndex = 11;
             this.Tb_Ph2MinusPv.Text = "2";
             // 
@@ -113,7 +119,7 @@
             this.Btn_Calcualte.Location = new System.Drawing.Point(356, 373);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
             this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
-            this.Btn_Calcualte.TabIndex = 100000;
+            this.Btn_Calcualte.TabIndex = 10000000;
             this.Btn_Calcualte.Text = "计算";
             this.Btn_Calcualte.UseVisualStyleBackColor = true;
             this.Btn_Calcualte.Click += new System.EventHandler(this.Btn_Calcualte_Click);
@@ -217,14 +223,14 @@
             // 
             this.Tb_TypeOneLoopCount.Location = new System.Drawing.Point(116, 118);
             this.Tb_TypeOneLoopCount.Name = "Tb_TypeOneLoopCount";
-            this.Tb_TypeOneLoopCount.Size = new System.Drawing.Size(72, 21);
+            this.Tb_TypeOneLoopCount.Size = new System.Drawing.Size(44, 21);
             this.Tb_TypeOneLoopCount.TabIndex = 25;
             this.Tb_TypeOneLoopCount.Text = "200";
             // 
             // LB_LoopCountUnit
             // 
             this.LB_LoopCountUnit.AutoSize = true;
-            this.LB_LoopCountUnit.Location = new System.Drawing.Point(194, 121);
+            this.LB_LoopCountUnit.Location = new System.Drawing.Point(166, 121);
             this.LB_LoopCountUnit.Name = "LB_LoopCountUnit";
             this.LB_LoopCountUnit.Size = new System.Drawing.Size(41, 12);
             this.LB_LoopCountUnit.TabIndex = 26;
@@ -263,7 +269,7 @@
             // Lb_TypeOneDeviation
             // 
             this.Lb_TypeOneDeviation.AutoSize = true;
-            this.Lb_TypeOneDeviation.Location = new System.Drawing.Point(241, 121);
+            this.Lb_TypeOneDeviation.Location = new System.Drawing.Point(211, 121);
             this.Lb_TypeOneDeviation.Name = "Lb_TypeOneDeviation";
             this.Lb_TypeOneDeviation.Size = new System.Drawing.Size(47, 12);
             this.Lb_TypeOneDeviation.TabIndex = 30;
@@ -271,9 +277,9 @@
             // 
             // Tb_TypeOneIncreaseNumber
             // 
-            this.Tb_TypeOneIncreaseNumber.Location = new System.Drawing.Point(289, 118);
+            this.Tb_TypeOneIncreaseNumber.Location = new System.Drawing.Point(259, 118);
             this.Tb_TypeOneIncreaseNumber.Name = "Tb_TypeOneIncreaseNumber";
-            this.Tb_TypeOneIncreaseNumber.Size = new System.Drawing.Size(74, 21);
+            this.Tb_TypeOneIncreaseNumber.Size = new System.Drawing.Size(52, 21);
             this.Tb_TypeOneIncreaseNumber.TabIndex = 31;
             this.Tb_TypeOneIncreaseNumber.Text = "0.00001";
             // 
@@ -290,14 +296,14 @@
             // 
             this.Tb_TypeTwoLoopCount.Location = new System.Drawing.Point(116, 150);
             this.Tb_TypeTwoLoopCount.Name = "Tb_TypeTwoLoopCount";
-            this.Tb_TypeTwoLoopCount.Size = new System.Drawing.Size(72, 21);
+            this.Tb_TypeTwoLoopCount.Size = new System.Drawing.Size(44, 21);
             this.Tb_TypeTwoLoopCount.TabIndex = 25;
             this.Tb_TypeTwoLoopCount.Text = "200";
             // 
             // Lb_TypeTwoLoopCountUnit
             // 
             this.Lb_TypeTwoLoopCountUnit.AutoSize = true;
-            this.Lb_TypeTwoLoopCountUnit.Location = new System.Drawing.Point(194, 153);
+            this.Lb_TypeTwoLoopCountUnit.Location = new System.Drawing.Point(166, 153);
             this.Lb_TypeTwoLoopCountUnit.Name = "Lb_TypeTwoLoopCountUnit";
             this.Lb_TypeTwoLoopCountUnit.Size = new System.Drawing.Size(41, 12);
             this.Lb_TypeTwoLoopCountUnit.TabIndex = 26;
@@ -306,7 +312,7 @@
             // Lb_TypeTwoDeviation
             // 
             this.Lb_TypeTwoDeviation.AutoSize = true;
-            this.Lb_TypeTwoDeviation.Location = new System.Drawing.Point(241, 153);
+            this.Lb_TypeTwoDeviation.Location = new System.Drawing.Point(211, 153);
             this.Lb_TypeTwoDeviation.Name = "Lb_TypeTwoDeviation";
             this.Lb_TypeTwoDeviation.Size = new System.Drawing.Size(47, 12);
             this.Lb_TypeTwoDeviation.TabIndex = 30;
@@ -314,9 +320,9 @@
             // 
             // Tb_TypeTwoIncreaseNumber
             // 
-            this.Tb_TypeTwoIncreaseNumber.Location = new System.Drawing.Point(289, 150);
+            this.Tb_TypeTwoIncreaseNumber.Location = new System.Drawing.Point(259, 150);
             this.Tb_TypeTwoIncreaseNumber.Name = "Tb_TypeTwoIncreaseNumber";
-            this.Tb_TypeTwoIncreaseNumber.Size = new System.Drawing.Size(74, 21);
+            this.Tb_TypeTwoIncreaseNumber.Size = new System.Drawing.Size(52, 21);
             this.Tb_TypeTwoIncreaseNumber.TabIndex = 31;
             this.Tb_TypeTwoIncreaseNumber.Text = "0.00001";
             // 
@@ -333,14 +339,14 @@
             // 
             this.Tb_TypeThreeLoopCount.Location = new System.Drawing.Point(116, 183);
             this.Tb_TypeThreeLoopCount.Name = "Tb_TypeThreeLoopCount";
-            this.Tb_TypeThreeLoopCount.Size = new System.Drawing.Size(72, 21);
+            this.Tb_TypeThreeLoopCount.Size = new System.Drawing.Size(44, 21);
             this.Tb_TypeThreeLoopCount.TabIndex = 25;
             this.Tb_TypeThreeLoopCount.Text = "200";
             // 
             // Lb_TypeThreeLoopCountUnit
             // 
             this.Lb_TypeThreeLoopCountUnit.AutoSize = true;
-            this.Lb_TypeThreeLoopCountUnit.Location = new System.Drawing.Point(194, 186);
+            this.Lb_TypeThreeLoopCountUnit.Location = new System.Drawing.Point(166, 186);
             this.Lb_TypeThreeLoopCountUnit.Name = "Lb_TypeThreeLoopCountUnit";
             this.Lb_TypeThreeLoopCountUnit.Size = new System.Drawing.Size(41, 12);
             this.Lb_TypeThreeLoopCountUnit.TabIndex = 26;
@@ -349,7 +355,7 @@
             // Lb_TypeThreeDeviation
             // 
             this.Lb_TypeThreeDeviation.AutoSize = true;
-            this.Lb_TypeThreeDeviation.Location = new System.Drawing.Point(241, 186);
+            this.Lb_TypeThreeDeviation.Location = new System.Drawing.Point(211, 186);
             this.Lb_TypeThreeDeviation.Name = "Lb_TypeThreeDeviation";
             this.Lb_TypeThreeDeviation.Size = new System.Drawing.Size(47, 12);
             this.Lb_TypeThreeDeviation.TabIndex = 30;
@@ -357,9 +363,9 @@
             // 
             // Tb_TypeThreeIncreaseNumber
             // 
-            this.Tb_TypeThreeIncreaseNumber.Location = new System.Drawing.Point(289, 183);
+            this.Tb_TypeThreeIncreaseNumber.Location = new System.Drawing.Point(259, 183);
             this.Tb_TypeThreeIncreaseNumber.Name = "Tb_TypeThreeIncreaseNumber";
-            this.Tb_TypeThreeIncreaseNumber.Size = new System.Drawing.Size(74, 21);
+            this.Tb_TypeThreeIncreaseNumber.Size = new System.Drawing.Size(52, 21);
             this.Tb_TypeThreeIncreaseNumber.TabIndex = 31;
             this.Tb_TypeThreeIncreaseNumber.Text = "0.00001";
             // 
@@ -437,7 +443,7 @@
             // Lb_TValue
             // 
             this.Lb_TValue.AutoSize = true;
-            this.Lb_TValue.Location = new System.Drawing.Point(235, 92);
+            this.Lb_TValue.Location = new System.Drawing.Point(205, 92);
             this.Lb_TValue.Name = "Lb_TValue";
             this.Lb_TValue.Size = new System.Drawing.Size(53, 12);
             this.Lb_TValue.TabIndex = 39;
@@ -445,16 +451,71 @@
             // 
             // Tb_TValue
             // 
-            this.Tb_TValue.Location = new System.Drawing.Point(289, 89);
+            this.Tb_TValue.Location = new System.Drawing.Point(259, 89);
             this.Tb_TValue.Name = "Tb_TValue";
-            this.Tb_TValue.Size = new System.Drawing.Size(74, 21);
+            this.Tb_TValue.Size = new System.Drawing.Size(52, 21);
             this.Tb_TValue.TabIndex = 40;
+            // 
+            // Lb_TypeOneDefaultX
+            // 
+            this.Lb_TypeOneDefaultX.AutoSize = true;
+            this.Lb_TypeOneDefaultX.Location = new System.Drawing.Point(319, 123);
+            this.Lb_TypeOneDefaultX.Name = "Lb_TypeOneDefaultX";
+            this.Lb_TypeOneDefaultX.Size = new System.Drawing.Size(53, 12);
+            this.Lb_TypeOneDefaultX.TabIndex = 100001;
+            this.Lb_TypeOneDefaultX.Text = "X初始值:";
+            // 
+            // Tb_TypeOneDefaultX
+            // 
+            this.Tb_TypeOneDefaultX.Location = new System.Drawing.Point(378, 118);
+            this.Tb_TypeOneDefaultX.Name = "Tb_TypeOneDefaultX";
+            this.Tb_TypeOneDefaultX.Size = new System.Drawing.Size(46, 21);
+            this.Tb_TypeOneDefaultX.TabIndex = 10;
+            // 
+            // Lb_TypeTwoDefaultX
+            // 
+            this.Lb_TypeTwoDefaultX.AutoSize = true;
+            this.Lb_TypeTwoDefaultX.Location = new System.Drawing.Point(319, 153);
+            this.Lb_TypeTwoDefaultX.Name = "Lb_TypeTwoDefaultX";
+            this.Lb_TypeTwoDefaultX.Size = new System.Drawing.Size(53, 12);
+            this.Lb_TypeTwoDefaultX.TabIndex = 100001;
+            this.Lb_TypeTwoDefaultX.Text = "X初始值:";
+            // 
+            // Tb_TypeTwoDefaultX
+            // 
+            this.Tb_TypeTwoDefaultX.Location = new System.Drawing.Point(378, 148);
+            this.Tb_TypeTwoDefaultX.Name = "Tb_TypeTwoDefaultX";
+            this.Tb_TypeTwoDefaultX.Size = new System.Drawing.Size(46, 21);
+            this.Tb_TypeTwoDefaultX.TabIndex = 10;
+            this.Tb_TypeTwoDefaultX.Text = "1";
+            // 
+            // Lb_TypeThreeDefaultX
+            // 
+            this.Lb_TypeThreeDefaultX.AutoSize = true;
+            this.Lb_TypeThreeDefaultX.Location = new System.Drawing.Point(319, 186);
+            this.Lb_TypeThreeDefaultX.Name = "Lb_TypeThreeDefaultX";
+            this.Lb_TypeThreeDefaultX.Size = new System.Drawing.Size(53, 12);
+            this.Lb_TypeThreeDefaultX.TabIndex = 100001;
+            this.Lb_TypeThreeDefaultX.Text = "X初始值:";
+            // 
+            // Tb_TypeThreeDefaultX
+            // 
+            this.Tb_TypeThreeDefaultX.Location = new System.Drawing.Point(378, 181);
+            this.Tb_TypeThreeDefaultX.Name = "Tb_TypeThreeDefaultX";
+            this.Tb_TypeThreeDefaultX.Size = new System.Drawing.Size(46, 21);
+            this.Tb_TypeThreeDefaultX.TabIndex = 10;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 423);
+            this.Controls.Add(this.Tb_TypeThreeDefaultX);
+            this.Controls.Add(this.Tb_TypeTwoDefaultX);
+            this.Controls.Add(this.Tb_TypeOneDefaultX);
+            this.Controls.Add(this.Lb_TypeThreeDefaultX);
+            this.Controls.Add(this.Lb_TypeTwoDefaultX);
+            this.Controls.Add(this.Lb_TypeOneDefaultX);
             this.Controls.Add(this.Tb_TValue);
             this.Controls.Add(this.Lb_TValue);
             this.Controls.Add(this.Cb_ResultSaveType);
@@ -551,6 +612,12 @@
         private System.Windows.Forms.ComboBox Cb_ResultSaveType;
         private System.Windows.Forms.Label Lb_TValue;
         private System.Windows.Forms.TextBox Tb_TValue;
+        private System.Windows.Forms.Label Lb_TypeOneDefaultX;
+        private System.Windows.Forms.TextBox Tb_TypeOneDefaultX;
+        private System.Windows.Forms.Label Lb_TypeTwoDefaultX;
+        private System.Windows.Forms.TextBox Tb_TypeTwoDefaultX;
+        private System.Windows.Forms.Label Lb_TypeThreeDefaultX;
+        private System.Windows.Forms.TextBox Tb_TypeThreeDefaultX;
     }
 }
 

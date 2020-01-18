@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace DataExtractorTool.Services
 {
+    /// <summary>
+    /// 三类数据
+    /// </summary>
     public class PvPh1Ph2 : CalculateBase
     {
         public override ParallelLoopResult ParallelRun(CalculateConfig config, InputData inputData)
@@ -29,10 +32,11 @@ namespace DataExtractorTool.Services
                 coefficient = 1;
             }
             var item = coefficient * config.SanleiIncreaseNumber;
+            var start = config.TypeThreeDefaultX ?? dr;
 
             return Parallel.For(0, config.SanleiLoopCount, (i, state) =>
             {
-                var x = item * i + dr;
+                var x = item * i + start;
                 var t = randP * (dr - x) / fenmu;
 
                 if (t < config.TMinimumValue) return;

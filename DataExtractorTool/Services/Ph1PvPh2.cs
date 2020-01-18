@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace DataExtractorTool.Services
 {
+    /// <summary>
+    /// 二类数据
+    /// </summary>
     public class Ph1PvPh2 : CalculateBase
     {
         public override ParallelLoopResult ParallelRun(CalculateConfig config, InputData inputData)
@@ -20,22 +23,20 @@ namespace DataExtractorTool.Services
             var fenmu = inputData.S1 - inputData.S2 * dr;
 
             int coefficient;
-            double xStart;
             if (fenmu > 0)
             {
                 coefficient = -1;
-                xStart = 2 * dr / (dr + 1);
             }
             else
             {
                 coefficient = 1;
-                xStart = 2 * dr / (dr + 1);
             }
             var item = coefficient * config.ErleiIncreaseNumber;
+            var start = config.TypeTwoDefaultX ?? 2 * dr / (dr + 1);
 
-            return Parallel.For(1, config.ErleiLoopCount, (i, state) =>
+            return Parallel.For(0, config.ErleiLoopCount, (i, state) =>
             {
-                var x = item * i + xStart;
+                var x = item * i + start;
                 var t = (dr * randP * (2 - x) - randP * x) / fenmu;
 
                 if (t < config.TMinimumValue) return;
