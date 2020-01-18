@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomSample.cs" />
     <Compile Include="Services\CalculateBase.cs" />
     <Compile Include="Services\CalculateConfig.cs" />
     <Compile Include="Services\FileHelper.cs" />

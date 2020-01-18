@@ -344,7 +344,7 @@ namespace DataExtractorTool
 
             if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
             {
-                var random = new Random((int)DateTime.Now.Ticks);
+                var random = new ThreadSafeRandom();
                 var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
                 inputData.RandP = rp + inputData.RandomNumberStart;
             }
