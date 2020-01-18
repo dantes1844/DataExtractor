@@ -305,7 +305,7 @@ namespace DataExtractorTool
                     Btn_Calcualte.Text = "计算";
                 }));
 
-                Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = "计算完毕，请查看文件内容"; }));
+                Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = Lb_TotalTime.Text.Insert(1, "计算完毕，请查看文件内容."); }));
                 Lb_Total.Invoke(new Action(() => { Lb_Total.Text = "0"; }));
                 Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = "0"; }));
 
