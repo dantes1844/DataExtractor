@@ -263,16 +263,7 @@ namespace DataExtractorTool
 
                 Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count().ToString(); }));
 
-                var fileInfo = new FileInfo(path);
-                var dotPosition = fileInfo.Name.LastIndexOf(".");
-
-                var savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name.Insert(dotPosition, ".result")}");
-                if (dotPosition < 0)
-                {
-                    savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
-                }
-
-                FileHelper.SaveBaseData(savedFile, dataList, resultSaveType);
+                var savedFile = SaveFile(path, dataList, resultSaveType);
 
                 //文件已经保存了再设置按钮的可用状态
                 Btn_Calcualte.Invoke(new Action(() =>
@@ -297,6 +288,21 @@ namespace DataExtractorTool
             });
 
             #endregion
+        }
+
+        private static string SaveFile(string path, List<InputData> dataList, ResultSaveType resultSaveType)
+        {
+            var fileInfo = new FileInfo(path);
+            var dotPosition = fileInfo.Name.LastIndexOf(".");
+
+            var savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name.Insert(dotPosition, ".result")}");
+            if (dotPosition < 0)
+            {
+                savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
+            }
+
+            FileHelper.SaveBaseData(savedFile, dataList, resultSaveType);
+            return savedFile;
         }
 
         private void Calculate(InputData inputData, CalculateConfig config)
@@ -377,28 +383,18 @@ namespace DataExtractorTool
 
                      Stopwatch stopwatch = Stopwatch.StartNew();
 
-                     var result = Parallel.ForEach(dataList, inputData =>
+                     Parallel.ForEach(dataList, inputData =>
                      {
                          Calculate(inputData, config);
 
                          Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
                          Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = $"(正在计算:{fileinfo.Name})"; }));
                          Debug.WriteLine($"正在计算{fileinfo.Name},当前执行完成了{_recordStack.Count}.耗时:{stopwatch.ElapsedMilliseconds / 1000.0}s)");
-
                      });
 
                      Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count().ToString(); }));
 
-                     var fileInfo = new FileInfo(file);
-                     var dotPosition = fileInfo.Name.LastIndexOf(".");
-
-                     var savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name.Insert(dotPosition, ".result")}");
-                     if (dotPosition < 0)
-                     {
-                         savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
-                     }
-
-                     FileHelper.SaveBaseData(savedFile, dataList, resultSaveType);
+                     SaveFile(file, dataList, resultSaveType);
 
                      #endregion
                  }
