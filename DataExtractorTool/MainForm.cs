@@ -206,7 +206,7 @@ namespace DataExtractorTool
                 return;
             }
 
-            var dataList = FileReader.ReadBaseData(path);
+            var dataList = FileHelper.ReadBaseData(path);
             if (dataList.Count == 0)
             {
                 MessageBox.Show("指定的文件没有读取到合法数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -299,7 +299,7 @@ namespace DataExtractorTool
                     savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                 }
 
-                FileReader.SaveBaseData(savedFile, dataList, resultSaveType);
+                FileHelper.SaveBaseData(savedFile, dataList, resultSaveType);
 
                 //文件已经保存了再设置按钮的可用状态
                 Btn_Calcualte.Invoke(new Action(() =>
@@ -354,7 +354,7 @@ namespace DataExtractorTool
 
                      var fileinfo = new FileInfo(file);
 
-                     var dataList = FileReader.ReadBaseData(file);
+                     var dataList = FileHelper.ReadBaseData(file);
 
                      #region 计算
 
@@ -424,7 +424,7 @@ namespace DataExtractorTool
                          savedFile = Path.Combine(fileInfo.DirectoryName, $"{fileInfo.Name}.result.dat");
                      }
 
-                     FileReader.SaveBaseData(savedFile, dataList, resultSaveType);
+                     FileHelper.SaveBaseData(savedFile, dataList, resultSaveType);
 
                      #endregion
                  }
@@ -451,7 +451,7 @@ namespace DataExtractorTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FileReader.SaveBaseData(@"D:\yujian\test.data", new List<InputData>(), ResultSaveType.All);
+            FileHelper.SaveBaseData(@"D:\yujian\test.data", new List<InputData>(), ResultSaveType.All);
             var service = new PvPh1Ph2();
             var random = new Random();
             var sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;

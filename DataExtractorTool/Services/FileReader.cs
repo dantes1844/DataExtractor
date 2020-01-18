@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataExtractorTool.Services
 {
-    public class FileReader
+    public class FileHelper
     {
         public static List<InputData> ReadBaseData(string defaultFile)
         {
