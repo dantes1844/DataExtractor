@@ -62,7 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CalculateBase.cs" />
     <Compile Include="Services\CalculateConfig.cs" />
-    <Compile Include="Services\FileReader.cs" />
+    <Compile Include="Services\FileHelper.cs" />
     <Compile Include="Services\InputData.cs" />
     <Compile Include="Services\Ph1Ph2Pv.cs" />
     <Compile Include="Services\Ph1PvPh2.cs" />

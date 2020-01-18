@@ -1,4 +1,6 @@
-﻿namespace DataExtractorTool.Services
+﻿using System;
+
+namespace DataExtractorTool.Services
 {
     public class InputData
     {
@@ -67,6 +69,16 @@
         public override string ToString()
         {
             return $"S1={S1},S2={S2},S3={S3},Dr*S3-S1={Dr * S3 - S1},Rp={RandP}";
+        }
+
+        public string ToTextString()
+        {
+            return $"{PointNumber}\t{(int)DataType}\t{S1:F4}\t{S2:F4}\t{S3:F4}\t{Dr}\t{RandP:F4}\t{X:F4}\t{T:F4}\t{Ph1:F4}\t{Ph2:F4}\t{Pv:F4}";
+        }
+
+        public string ToCsvString()
+        {
+            return $"{PointNumber},{(int)DataType},{S1},{S2},{S3},{Dr},{RandP},{X},{T},{Ph1},{Ph2},{Pv}";
         }
     }
 

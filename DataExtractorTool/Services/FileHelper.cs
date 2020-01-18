@@ -83,6 +83,8 @@ namespace DataExtractorTool.Services
         {
             var csvText = new StringBuilder();
             var txtText = new StringBuilder();
+
+            txtText.Append($"No.\ttype\tS1\tS2\tS3\tdr\trp\tx\tt\tph1\tph2\tpv{Environment.NewLine}");
             csvText.Append($"No.,type,S1,S2,S3,dr,rp,x,t,ph1,ph2,pv{Environment.NewLine}");
             if (list.Any())
             {
@@ -91,14 +93,14 @@ namespace DataExtractorTool.Services
                     switch (resultSaveType)
                     {
                         case ResultSaveType.All:
-                            txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}{Environment.NewLine}");
-                            csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}{Environment.NewLine}");
+                            txtText.AppendFormat($"{item.ToTextString()}{Environment.NewLine}");
+                            csvText.AppendFormat($"{item.ToCsvString()}{Environment.NewLine}");
                             break;
                         case ResultSaveType.Csv:
-                            csvText.AppendFormat($"{item.PointNumber},{(int)item.DataType},{item.S1},{item.S2},{item.S3},{item.Dr},{item.RandP},{item.X},{item.T},{item.Ph1},{item.Ph2},{item.Pv}{Environment.NewLine}");
+                            csvText.AppendFormat($"{item.ToCsvString()}{Environment.NewLine}");
                             break;
                         case ResultSaveType.Txt:
-                            txtText.AppendFormat($"{item.PointNumber}    {item.S1:F4}  {item.S2:F4}  {item.S3:F4}    {item.RandP:F4}  {item.X:F4}  {item.T:F4}  {item.Ph1:F4}  {item.Ph2:F4}  {item.Pv:F4}{Environment.NewLine}");
+                            txtText.AppendFormat($"{item.ToTextString()}{Environment.NewLine}");
                             break;
                     }
                 }
@@ -117,8 +119,6 @@ namespace DataExtractorTool.Services
                     SaveFile(defaultFile, txtText.ToString());
                     break;
             }
-
-
         }
 
         private static void SaveFile(string path, string text)
