@@ -150,9 +150,6 @@ namespace DataExtractorTool
                 SanleiIncreaseNumber = threeIncrease,
             };
 
-            double sameRandomNumber1 = 0d;
-            double sameRandomNumber3 = 0d;
-            double sameRandomNumber2 = 0d;
             if (Rb_RandomPerRecord.Checked)
             {
                 config.RandomNumberType = RandomNumberType.RandomNumberPerRecord;
@@ -161,9 +158,9 @@ namespace DataExtractorTool
             {
                 config.RandomNumberType = RandomNumberType.SameRandomNumber;
                 var random = new Random();
-                sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
-                sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
-                sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
+                _sameRandomNumber1 = (170 - 150) * random.NextDouble() + 150;
+                _sameRandomNumber2 = (190 - 170) * random.NextDouble() + 170;
+                _sameRandomNumber3 = (210 - 190) * random.NextDouble() + 190;
             }
 
             #endregion
@@ -183,15 +180,20 @@ namespace DataExtractorTool
 
             if (Rb_SingleFile.Checked)
             {
-                SingleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
+                SingleFile(config);
             }
             else if (Rb_MulitpleFiles.Checked)
             {
-                MulitipleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
+                MulitipleFile(config);
             }
         }
 
-        private void SingleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
+        double _sameRandomNumber1;
+        double _sameRandomNumber3;
+        double _sameRandomNumber2;
+
+
+        private void SingleFile(CalculateConfig config)
         {
             _recordStack = new ConcurrentBag<InputData>();
             var resultSaveType = (ResultSaveType)Cb_ResultSaveType.SelectedValue;
@@ -247,36 +249,7 @@ namespace DataExtractorTool
 
                     var result = Parallel.ForEach(subTemp, inputData =>
                     {
-                        CalculateBase service;
-                        switch (inputData.DataType)
-                        {
-                            case DataType.Yilei:
-                                inputData.RandP = sameRandomNumber1;
-                                service = new Ph1Ph2Pv();
-                                break;
-                            case DataType.Erlei:
-                                inputData.RandP = sameRandomNumber2;
-                                service = new Ph1PvPh2();
-                                break;
-                            case DataType.Sanlei:
-                                inputData.RandP = sameRandomNumber3;
-                                service = new PvPh1Ph2();
-                                break;
-                            default:
-                                service = null;
-                                break;
-                        }
-
-                        if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
-                        {
-                            var random = new Random((int)DateTime.Now.Ticks);
-                            var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
-                            inputData.RandP = rp + inputData.RandomNumberStart;
-                        }
-
-                        service?.ParallelRun(config, inputData);
-                        _recordStack.Add(inputData);
-
+                        Calculate(inputData, config);
 
                         if (_recordStack.Count % 1000 == 0)
                         {
@@ -310,8 +283,8 @@ namespace DataExtractorTool
 
                 Lb_TotalTime.Invoke(new Action(() =>
                 {
-                    Lb_TotalTime.Text = string.IsNullOrEmpty(Lb_TotalTime.Text) 
-                        ? "计算完毕，请查看文件内容." 
+                    Lb_TotalTime.Text = string.IsNullOrEmpty(Lb_TotalTime.Text)
+                        ? "计算完毕，请查看文件内容."
                         : Lb_TotalTime.Text.Insert(1, "计算完毕，请查看文件内容.");
                 }));
 
@@ -326,7 +299,40 @@ namespace DataExtractorTool
             #endregion
         }
 
-        private void MulitipleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
+        private void Calculate(InputData inputData, CalculateConfig config)
+        {
+            CalculateBase service;
+            switch (inputData.DataType)
+            {
+                case DataType.Yilei:
+                    inputData.RandP = _sameRandomNumber1;
+                    service = new Ph1Ph2Pv();
+                    break;
+                case DataType.Erlei:
+                    inputData.RandP = _sameRandomNumber2;
+                    service = new Ph1PvPh2();
+                    break;
+                case DataType.Sanlei:
+                    inputData.RandP = _sameRandomNumber3;
+                    service = new PvPh1Ph2();
+                    break;
+                default:
+                    service = null;
+                    break;
+            }
+
+            if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
+            {
+                var random = new Random((int)DateTime.Now.Ticks);
+                var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
+                inputData.RandP = rp + inputData.RandomNumberStart;
+            }
+
+            service?.ParallelRun(config, inputData);
+            _recordStack.Add(inputData);
+        }
+
+        private void MulitipleFile(CalculateConfig config)
         {
             #region 路径
 
@@ -371,41 +377,9 @@ namespace DataExtractorTool
 
                      Stopwatch stopwatch = Stopwatch.StartNew();
 
-                     //foreach (var inputData in dataList)
-                     //{
-
-                     //}
                      var result = Parallel.ForEach(dataList, inputData =>
                      {
-                         CalculateBase service;
-                         switch (inputData.DataType)
-                         {
-                             case DataType.Yilei:
-                                 inputData.RandP = sameRandomNumber1;
-                                 service = new Ph1Ph2Pv();
-                                 break;
-                             case DataType.Erlei:
-                                 inputData.RandP = sameRandomNumber2;
-                                 service = new Ph1PvPh2();
-                                 break;
-                             case DataType.Sanlei:
-                                 inputData.RandP = sameRandomNumber3;
-                                 service = new PvPh1Ph2();
-                                 break;
-                             default:
-                                 service = null;
-                                 break;
-                         }
-
-                         if (config.RandomNumberType == RandomNumberType.RandomNumberPerRecord)
-                         {
-                             var random = new Random((int)DateTime.Now.Ticks);
-                             var rp = (inputData.RandomNumberEnd - inputData.RandomNumberStart) * random.NextDouble();
-                             inputData.RandP = rp + inputData.RandomNumberStart;
-                         }
-
-                         service?.ParallelRun(config, inputData);
-                         _recordStack.Add(inputData);
+                         Calculate(inputData, config);
 
                          Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = _recordStack.Count(c => c.T > 0 || c.T < 0).ToString(); }));
                          Lb_TotalTime.Invoke(new Action(() => { Lb_TotalTime.Text = $"(正在计算:{fileinfo.Name})"; }));
