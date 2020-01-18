@@ -6,6 +6,7 @@ namespace DataExtractorTool
 {
     /// <summary>
     /// 多线程随机数类
+    /// 参考链接：https://blog.csdn.net/xxdddail/article/details/16980743
     /// </summary>
     public class ThreadSafeRandom : Random
     {
