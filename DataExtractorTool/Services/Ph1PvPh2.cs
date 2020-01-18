@@ -24,12 +24,12 @@ namespace DataExtractorTool.Services
             if (fenmu > 0)
             {
                 coefficient = -1;
-                xStart = (dr + 1) / (2 * dr);
+                xStart = 2 * dr / (dr + 1);
             }
             else
             {
                 coefficient = 1;
-                xStart = 2 * dr / (dr + 1);
+                xStart = (dr + 1) / (2 * dr);
             }
             var item = coefficient * config.ErleiIncreaseNumber;
 
@@ -45,7 +45,7 @@ namespace DataExtractorTool.Services
                 var ph2 = s2 * t + randP * (2 - x);
 
                 var flag1 = ph1 > pv + config.DefaultDeviation && pv > ph2 + config.DefaultDeviation;
-                var flag2 = Math.Abs(ph1 / ph2 - dr) <= 0.0001;
+                var flag2 = Math.Abs(ph1 / ph2 - dr) <= FloatDeviation;
 
                 if (!flag2 || !flag1) return;
 
@@ -116,7 +116,7 @@ namespace DataExtractorTool.Services
                 Debug.WriteLine($"S1={s1},s2={s2},s3={s3},x={x},t={t},ph1={ph1:F4},pv={pv:F4},ph2={ph2:F4},ph1/ph2={ph1 / ph2:F4}");
 
                 var flag1 = ph1 > pv + config.DefaultDeviation && pv > ph2 + config.DefaultDeviation;
-                var flag2 = Math.Abs(ph1 / ph2 - dr) <= 0.0001;
+                var flag2 = Math.Abs(ph1 / ph2 - dr) <= FloatDeviation;
 
                 if (!flag2 || !flag1) continue;
 

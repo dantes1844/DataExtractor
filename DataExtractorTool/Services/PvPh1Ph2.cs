@@ -42,7 +42,7 @@ namespace DataExtractorTool.Services
                 var ph2 = s2 * t + randP;
 
                 var flag1 = pv > ph1 + config.DefaultDeviation && ph1 > ph2 + config.DefaultDeviation;
-                var flag2 = Math.Abs(pv / ph2 - dr) <= 0.0001;
+                var flag2 = Math.Abs(pv / ph2 - dr) <= FloatDeviation;
 
                 if (!flag2 || !flag1) return;
 
@@ -105,7 +105,7 @@ namespace DataExtractorTool.Services
                 var ph2 = inputData.S2 * t + inputData.RandP;
 
                 var flag1 = pv > ph1 + config.DefaultDeviation && ph1 > ph2 + config.DefaultDeviation;
-                var flag2 = Math.Abs(pv / ph2 - inputData.Dr) <= 0.0001;
+                var flag2 = Math.Abs(pv / ph2 - inputData.Dr) <= FloatDeviation;
 
 
                 Debug.WriteLine($"S1={inputData.S1},S2={inputData.S2},S3={inputData.S3},RandP={inputData.RandP:F4},Dr={inputData.Dr},X={x},T={t},Pv={pv},Ph1={ph1},Ph2={ph2},pv-ph1={pv - ph1},fenmu={fenmu}");

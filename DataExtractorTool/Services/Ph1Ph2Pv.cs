@@ -42,7 +42,7 @@ namespace DataExtractorTool.Services
                 var pv = Pv(s3, t, randP, x);
 
                 var flag1 = ph1 > ph2 + config.DefaultDeviation && ph2 > pv + config.DefaultDeviation;
-                var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
+                var flag2 = Math.Abs(ph1 / pv - dr) <= FloatDeviation;
 
                 if (!flag2 || !flag1) return;
 
@@ -126,7 +126,7 @@ namespace DataExtractorTool.Services
                 var pv = Pv(s3, t, randP, x);
 
                 var flag1 = ph1 > ph2 + 2 && ph2 > pv + 2;
-                var flag2 = Math.Abs(ph1 / pv - dr) <= 0.0001;
+                var flag2 = Math.Abs(ph1 / pv - dr) <= FloatDeviation;
 
                 if (flag2 && flag1)
                 {
