@@ -246,7 +246,7 @@
             this.Btn_Debug.Text = "调试";
             this.Btn_Debug.UseVisualStyleBackColor = true;
             this.Btn_Debug.Visible = false;
-            this.Btn_Debug.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_Debug.Click += new System.EventHandler(this.Debug_Click);
             // 
             // Lb_DataType
             // 

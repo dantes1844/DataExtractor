@@ -428,7 +428,7 @@ namespace DataExtractorTool
             });
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Debug_Click(object sender, EventArgs e)
         {
             FileHelper.SaveBaseData(@"D:\yujian\test.data", new List<InputData>(), ResultSaveType.All);
             var service = new PvPh1Ph2();
