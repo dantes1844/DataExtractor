@@ -113,7 +113,7 @@
             this.Btn_Calcualte.Location = new System.Drawing.Point(356, 373);
             this.Btn_Calcualte.Name = "Btn_Calcualte";
             this.Btn_Calcualte.Size = new System.Drawing.Size(88, 41);
-            this.Btn_Calcualte.TabIndex = 14;
+            this.Btn_Calcualte.TabIndex = 100000;
             this.Btn_Calcualte.Text = "计算";
             this.Btn_Calcualte.UseVisualStyleBackColor = true;
             this.Btn_Calcualte.Click += new System.EventHandler(this.Btn_Calcualte_Click);

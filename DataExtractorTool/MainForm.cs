@@ -314,8 +314,6 @@ namespace DataExtractorTool
                         ? "计算完毕，请查看文件内容." 
                         : Lb_TotalTime.Text.Insert(1, "计算完毕，请查看文件内容.");
                 }));
-                Lb_Total.Invoke(new Action(() => { Lb_Total.Text = "0"; }));
-                Lb_Finished.Invoke(new Action(() => { Lb_Finished.Text = "0"; }));
 
                 var openFileConfirm = MessageBox.Show("计算完成。是否打开结果文件夹", "提示", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information);
