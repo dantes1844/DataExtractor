@@ -81,6 +81,7 @@ namespace DataExtractorTool
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
             {
                 MessageBox.Show("差值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_Ph2MinusPv.Focus();
                 return;
             }
             config.DefaultDeviation = deviation;
@@ -111,6 +112,7 @@ namespace DataExtractorTool
             if (!double.TryParse(Tb_TypeOneIncreaseNumber.Text, out double oneIncrease))
             {
                 MessageBox.Show("一类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeOneIncreaseNumber.Focus();
                 return;
             }
             config.YileiIncreaseNumber = oneIncrease;
@@ -118,6 +120,7 @@ namespace DataExtractorTool
             if (!double.TryParse(Tb_TypeTwoIncreaseNumber.Text, out double twoIncrease))
             {
                 MessageBox.Show("二类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeTwoIncreaseNumber.Focus();
                 return;
             }
             config.ErleiIncreaseNumber = twoIncrease;
@@ -125,6 +128,7 @@ namespace DataExtractorTool
             if (!double.TryParse(Tb_TypeThreeIncreaseNumber.Text, out double threeIncrease))
             {
                 MessageBox.Show("三类修正值必须是个数字", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeThreeIncreaseNumber.Focus();
                 return;
             }
             config.SanleiIncreaseNumber = threeIncrease;
@@ -136,6 +140,7 @@ namespace DataExtractorTool
             if (!int.TryParse(Tb_TypeOneLoopCount.Text, out var oneLoopCount))
             {
                 MessageBox.Show("一类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeOneLoopCount.Focus();
                 return;
             }
             config.YileiLoopCount = oneLoopCount * LoopCountBase;
@@ -143,6 +148,7 @@ namespace DataExtractorTool
             if (!int.TryParse(Tb_TypeTwoLoopCount.Text, out var twoLoopCount))
             {
                 MessageBox.Show("二类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeTwoLoopCount.Focus();
                 return;
             }
             config.ErleiLoopCount = twoLoopCount * LoopCountBase;
@@ -150,6 +156,7 @@ namespace DataExtractorTool
             if (!int.TryParse(Tb_TypeThreeLoopCount.Text, out var threeLoopCount))
             {
                 MessageBox.Show("三类遍历次数必须是个正数", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tb_TypeThreeLoopCount.Focus();
                 return;
             }
             config.SanleiLoopCount = threeLoopCount * LoopCountBase;
