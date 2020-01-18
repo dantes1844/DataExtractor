@@ -177,6 +177,10 @@ namespace DataExtractorTool
 
             #endregion
 
+            Lb_TotalTime.Text = "";
+            Lb_Total.Text = "0";
+            Lb_Finished.Text = "0";
+
             if (Rb_SingleFile.Checked)
             {
                 SingleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
@@ -185,10 +189,6 @@ namespace DataExtractorTool
             {
                 MulitipleFile(config, sameRandomNumber1, sameRandomNumber2, sameRandomNumber3);
             }
-
-            Lb_TotalTime.Text = "";
-            Lb_Total.Text = "0";
-            Lb_Finished.Text = "0";
         }
 
         private void SingleFile(CalculateConfig config, double sameRandomNumber1, double sameRandomNumber2, double sameRandomNumber3)
