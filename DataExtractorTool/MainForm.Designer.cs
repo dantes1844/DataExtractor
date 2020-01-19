@@ -112,7 +112,6 @@
             this.Tb_Ph2MinusPv.Name = "Tb_Ph2MinusPv";
             this.Tb_Ph2MinusPv.Size = new System.Drawing.Size(77, 21);
             this.Tb_Ph2MinusPv.TabIndex = 11;
-            this.Tb_Ph2MinusPv.Text = "2";
             // 
             // Btn_Calcualte
             // 
