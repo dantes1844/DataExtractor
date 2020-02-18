@@ -1,14 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.902
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataExtractorTool", "DataExtractorTool\DataExtractorTool.csproj", "{CD092788-D0E5-4553-953D-C91ACF2D343A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Factory", "Factory", "{15D6B125-9295-4B22-89A5-CF785DC75A51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design Patterns", "Design Patterns", "{33F841A0-9BAB-4DB7-8055-38615DEBBE57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethod", "DesignPatterns\Factory\FactoryMehod\FactoryMethod.csproj", "{28999721-5624-4AD6-AC77-0C16884F1FC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactory", "DesignPatterns\Factory\AbstractFactory\AbstractFactory.csproj", "{B0ED3F81-A0FB-4F75-8993-67829D3DD950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFactory", "SimpleFactory\SimpleFactory.csproj", "{1B042524-28B3-4E22-9E59-C145C6DC392F}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -18,11 +25,32 @@ Global
 		{CD092788-D0E5-4553-953D-C91ACF2D343A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD092788-D0E5-4553-953D-C91ACF2D343A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD092788-D0E5-4553-953D-C91ACF2D343A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28999721-5624-4AD6-AC77-0C16884F1FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28999721-5624-4AD6-AC77-0C16884F1FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28999721-5624-4AD6-AC77-0C16884F1FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28999721-5624-4AD6-AC77-0C16884F1FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0ED3F81-A0FB-4F75-8993-67829D3DD950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0ED3F81-A0FB-4F75-8993-67829D3DD950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0ED3F81-A0FB-4F75-8993-67829D3DD950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0ED3F81-A0FB-4F75-8993-67829D3DD950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B042524-28B3-4E22-9E59-C145C6DC392F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B042524-28B3-4E22-9E59-C145C6DC392F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B042524-28B3-4E22-9E59-C145C6DC392F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B042524-28B3-4E22-9E59-C145C6DC392F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15D6B125-9295-4B22-89A5-CF785DC75A51} = {33F841A0-9BAB-4DB7-8055-38615DEBBE57}
+		{28999721-5624-4AD6-AC77-0C16884F1FC0} = {15D6B125-9295-4B22-89A5-CF785DC75A51}
+		{B0ED3F81-A0FB-4F75-8993-67829D3DD950} = {15D6B125-9295-4B22-89A5-CF785DC75A51}
+		{1B042524-28B3-4E22-9E59-C145C6DC392F} = {15D6B125-9295-4B22-89A5-CF785DC75A51}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E97BE02-7142-41B0-9036-4279055F03D5}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
