@@ -19,6 +19,8 @@ namespace DataExtractorTool
 {
     public partial class MainForm : Form
     {
+
+        private readonly CalculateConfig config = new CalculateConfig();
         public MainForm()
         {
             InitializeComponent();
@@ -37,6 +39,7 @@ namespace DataExtractorTool
             Cb_DataType.ValueMember = nameof(DataTypeList.Value);
 
             Cb_ResultSaveType.DataSource = Enum.GetValues(typeof(ResultSaveType));
+            Tb_Ph2MinusPv.Text = config.DefaultDeviation.ToString();
         }
 
         private void Btn_OpenFile_Click(object sender, EventArgs e)
@@ -75,7 +78,6 @@ namespace DataExtractorTool
 
         private void Btn_Calcualte_Click(object sender, EventArgs e)
         {
-            var config = new CalculateConfig();
             #region 差值
 
             if (!double.TryParse(Tb_Ph2MinusPv.Text, out double deviation))
@@ -196,11 +198,11 @@ namespace DataExtractorTool
 
             if (Rb_SingleFile.Checked)
             {
-                SingleFile(config);
+                SingleFile();
             }
             else if (Rb_MulitpleFiles.Checked)
             {
-                MulitipleFile(config);
+                MulitipleFile();
             }
         }
 
@@ -208,8 +210,7 @@ namespace DataExtractorTool
         double _sameRandomNumber3;
         double _sameRandomNumber2;
 
-
-        private void SingleFile(CalculateConfig config)
+        private void SingleFile()
         {
             _recordStack = new ConcurrentBag<InputData>();
             var resultSaveType = (ResultSaveType)Cb_ResultSaveType.SelectedValue;
@@ -354,7 +355,7 @@ namespace DataExtractorTool
             _recordStack.Add(inputData);
         }
 
-        private void MulitipleFile(CalculateConfig config)
+        private void MulitipleFile()
         {
             #region 路径
 
