@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PrototypeDemo
+namespace ShallowCopyPrototype
 {
     public class Product : ICloneable
     {
