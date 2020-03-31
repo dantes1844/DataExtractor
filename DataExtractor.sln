@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecoratorDemo", "DesignPatt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Decorator", "Decorator", "{F7DB83B8-1322-44B7-A75F-9A45A0A64F72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composition", "DesignPatterns\Composition\Composition\Composition.csproj", "{80A4F7F9-F584-4EE1-987B-147468F03285}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Composition", "DesignPatterns\Composition\Composition\Composition.csproj", "{80A4F7F9-F584-4EE1-987B-147468F03285}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CompostionPattern", "CompostionPattern", "{907AC0F6-F0E7-4E57-AC2B-B426EF224D9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBooksSettler", "EBooksSettler\EBooksSettler.csproj", "{9F14BF24-CB56-4CAC-A0F9-F4E9766B323E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{80A4F7F9-F584-4EE1-987B-147468F03285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80A4F7F9-F584-4EE1-987B-147468F03285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80A4F7F9-F584-4EE1-987B-147468F03285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F14BF24-CB56-4CAC-A0F9-F4E9766B323E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F14BF24-CB56-4CAC-A0F9-F4E9766B323E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F14BF24-CB56-4CAC-A0F9-F4E9766B323E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F14BF24-CB56-4CAC-A0F9-F4E9766B323E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
