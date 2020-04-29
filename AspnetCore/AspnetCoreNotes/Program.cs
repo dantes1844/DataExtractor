@@ -20,7 +20,7 @@ namespace AspnetCoreNotes
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseIIS().UseStartup<Startup>();
                 });
     }
 }
